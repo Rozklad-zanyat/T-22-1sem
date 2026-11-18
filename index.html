@@ -138,12 +138,12 @@
         .courses-table td:nth-child(3),
         .courses-table th:nth-child(4),
         .courses-table td:nth-child(4) {
-            width: 25%; /* Рівномірно розподіляємо ширину між 3 стовпцями */
+            width: 25%;
         }
         
         .courses-table th:first-child,
         .courses-table td:first-child {
-            width: 5%; /* Перший стовпець (№) займає менше місця */
+            width: 5%;
         }
         
         .course-row:nth-child(even) td {
@@ -255,6 +255,64 @@
             display: flex;
         }
         
+        /* Таблиця графіка освітнього процесу */
+        .edu-process-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 6px;
+            font-size: 0.95rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px var(--shadow-light);
+        }
+
+        .edu-process-table th {
+            background-color: var(--primary-green);
+            color: white;
+            padding: 8px 12px;
+            text-align: left;
+            font-weight: 600;
+            border: 1px solid var(--primary-green);
+        }
+
+        .edu-process-table td {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border-light);
+            border-right: 1px solid var(--border-light);
+            background-color: white;
+            color: var(--text-medium);
+        }
+
+        .edu-process-semester {
+            background-color: var(--pale-green) !important;
+            color: var(--primary-green) !important;
+            font-weight: 700;
+            border-left: 4px solid var(--primary-green);
+        }
+
+        .edu-process-date {
+            font-weight: 600;
+            color: var(--text-dark);
+            white-space: nowrap;
+        }
+
+        .edu-process-note {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .edu-badge-vacation {
+            display: inline-block;
+            background-color: var(--pale-green);
+            color: var(--primary-green);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border: 1px solid var(--light-green);
+        }
+
         /* Таблиця тижнів */
         .weeks-table {
             width: 100%;
@@ -377,12 +435,15 @@
                 font-size: 0.9rem;
             }
             
-            .weeks-table {
+            .weeks-table,
+            .edu-process-table {
                 font-size: 0.9rem;
             }
             
             .weeks-table th,
-            .weeks-table td {
+            .weeks-table td,
+            .edu-process-table th,
+            .edu-process-table td {
                 padding: 6px 8px;
             }
         }
@@ -532,24 +593,22 @@
         }
         
         .schedule-week-nad {
-            /* color: var(--primary-green); */
-			color: #800080;
+            color: #800080;
             font-weight: 600;
-			font-size: 0.65rem;
+            font-size: 0.65rem;
             font-style: italic;
         }
         
         .schedule-week-pid {
-            /* color: var(--light-green); */
-			color: #0000FF;
+            color: #0000FF;
             font-weight: 600;
-			font-size: 0.65rem;
+            font-size: 0.65rem;
             font-style: italic;
         }
         
         .empty-slot {
             color: var(--text-light);
-			font-weight: 600;
+            font-weight: 600;
             font-style: italic;
         }
     </style>
@@ -584,7 +643,7 @@
                             <td>1</td>
                             <td>
                                 <div class="course-name">Інформатика та комп'ютерна техніка</div>
-								<div class="teacher-name">Демченко Галина Миколаївна</div>
+                                <div class="teacher-name">Демченко Галина Миколаївна</div>
                             </td>
                             <td>
                                 <div class="btn-container">
@@ -599,9 +658,9 @@
                                     <a href="https://classroom.google.com/c/ODc1NTkwOTMyMzY5?cjc=tgq2kq4b" class="btn btn-classroom touch-friendly" target="_blank">
                                         <i class="fas fa-chalkboard-teacher"></i>Classroom
                                     </a>
-								</div>
-								&nbsp;
-							</td>
+                                </div>
+                                &nbsp;
+                            </td>
                         </tr>
                         
                         <!-- Рядок 2 -->
@@ -609,7 +668,7 @@
                             <td>2</td>
                             <td>
                                 <div class="course-name">Менеджмент</div>
-								<div class="teacher-name">Донцова Лариса Дем'янівна</div>
+                                <div class="teacher-name">Донцова Лариса Дем'янівна</div>
                             </td>
                             <td>
                                 <div class="btn-container">
@@ -618,13 +677,13 @@
                                     </a>
                                 </div>
                             </td>
-							<td>
+                            <td>
                                 <div class="btn-container">
                                     <a href="https://classroom.google.com/c/NTI2OTU3OTM2NTcz?cjc=sjveski" class="btn btn-classroom touch-friendly" target="_blank">
                                         <i class="fas fa-chalkboard-teacher"></i>Classroom
                                     </a>
                                 </div>
-							</td>
+                            </td>
                         </tr>
                         
                         <!-- Рядок 3 -->
@@ -632,7 +691,7 @@
                             <td>3</td>
                             <td>
                                 <div class="course-name">Фізична культура</div>
-								<div class="teacher-name">Літинський Максим Валерійович</div>
+                                <div class="teacher-name">Літинський Максим Валерійович</div>
                             </td>
                             <td>
                                 <div class="btn-container">
@@ -647,9 +706,9 @@
                                     <a href="https://classroom.google.com/c/ODc2MDk0MDM3NTU4?cjc=7rd2j5rk" class="btn btn-classroom touch-friendly" target="_blank">
                                         <i class="fas fa-chalkboard-teacher"></i>Classroom
                                     </a>
-								</div>
-								&nbsp;
-							</td>
+                                </div>
+                                &nbsp;
+                            </td>
                         </tr>
                         
                         <!-- Рядок 4 -->
@@ -657,7 +716,7 @@
                             <td>4</td>
                             <td>
                                 <div class="course-name">Підприємництво та культура бізнесу</div>
-								<div class="teacher-name">Непочатова Галина Володимирівна</div>
+                                <div class="teacher-name">Непочатова Галина Володимирівна</div>
                             </td>
                             <td>
                                 <div class="btn-container">
@@ -672,8 +731,8 @@
                                     <a href="https://classroom.google.com/c/ODc2NDM3NjU2NTYz?cjc=k2afyfuq" class="btn btn-classroom touch-friendly" target="_blank">
                                         <i class="fas fa-chalkboard-teacher"></i>Classroom
                                     </a>
-								</div>
-								&nbsp;
+                                </div>
+                                &nbsp;
                             </td>
                         </tr>
                         
@@ -682,7 +741,7 @@
                             <td>5</td>
                             <td>
                                 <div class="course-name">Соціологія</div>
-								<div class="teacher-name">Воронцова Вікторія Олексіївна</div>
+                                <div class="teacher-name">Воронцова Вікторія Олексіївна</div>
                             </td>
                             <td>
                                 <div class="btn-container">
@@ -697,9 +756,9 @@
                                     <a href="https://classroom.google.com/c/ODcwNDQ1NzU0NjQ4?hl=ru&hl=ru&cjc=435gvb5e" class="btn btn-classroom touch-friendly" target="_blank">
                                         <i class="fas fa-chalkboard-teacher"></i>Classroom
                                     </a>
-								</div>
-								&nbsp;
-							</td>
+                                </div>
+                                &nbsp;
+                            </td>
                         </tr>
                         
                         <!-- Рядок 6 -->
@@ -707,7 +766,7 @@
                             <td>6</td>
                             <td>
                                 <div class="course-name">Іноземна мова (за професійним спрямуванням)</div>
-								<div class="teacher-name">Щірова Олена Сергіївна</div>
+                                <div class="teacher-name">Щірова Олена Сергіївна</div>
                             </td>
                             <td>
                                 <div class="btn-container">
@@ -722,9 +781,9 @@
                                     <a href="https://classroom.google.com/c/ODc2MDk2NTYzMzA4?cjc=5ur67vyb" class="btn btn-classroom touch-friendly" target="_blank">
                                         <i class="fas fa-chalkboard-teacher"></i>Classroom
                                     </a>
-								</div>
-								&nbsp;
-							</td>
+                                </div>
+                                &nbsp;
+                            </td>
                         </tr>
                         
                         <!-- Рядок 7 -->
@@ -732,7 +791,7 @@
                             <td>7</td>
                             <td>
                                 <div class="course-name">Основи маркетингу</div>
-								<div class="teacher-name">Донцова Лариса Лем'янівна</div>
+                                <div class="teacher-name">Донцова Лариса Лем'янівна</div>
                             </td>
                             <td>
                                 <div class="btn-container">
@@ -747,7 +806,7 @@
                                         <i class="fas fa-chalkboard-teacher"></i>Classroom
                                     </a>
                                 </div>
-							</td>
+                            </td>
                         </tr>
                         
                         <!-- Рядок 8 -->
@@ -755,7 +814,7 @@
                             <td>8</td>
                             <td>
                                 <div class="course-name">Вступ до фаху та фінансова грамотність</div>
-								<div class="teacher-name">Непочатова Галина Володимирівна</div>
+                                <div class="teacher-name">Непочатова Галина Володимирівна</div>
                             </td>
                             <td>
                                 <div class="btn-container">
@@ -770,17 +829,17 @@
                                     <a href="https://classroom.google.com/c/ODc2NDM4MjY1OTA4?cjc=svirnbln" class="btn btn-classroom touch-friendly" target="_blank">
                                         <i class="fas fa-chalkboard-teacher"></i>Classroom
                                     </a>
-								</div>
-								&nbsp;
+                                </div>
+                                &nbsp;
                             </td>
                         </tr>
 
-						<!-- Рядок 9 -->
+                        <!-- Рядок 9 -->
                         <tr class="course-row">
                             <td>9</td>
                             <td>
                                 <div class="course-name">Комерційне товарознавство</div>
-								<div class="teacher-name">Попова Ірина Анатоліївна</div>
+                                <div class="teacher-name">Попова Ірина Анатоліївна</div>
                             </td>
                             <td>
                                 <div class="btn-container">
@@ -795,17 +854,17 @@
                                     <a href="https://classroom.google.com/c/ODc2NTQyNjE3NjI5?cjc=2oyjas5g" class="btn btn-classroom touch-friendly" target="_blank">
                                         <i class="fas fa-chalkboard-teacher"></i>Classroom
                                     </a>
-								</div>
-								&nbsp;
+                                </div>
+                                &nbsp;
                             </td>
                         </tr>
 
-						<!-- Рядок 10 -->
+                        <!-- Рядок 10 -->
                         <tr class="course-row">
                             <td>10</td>
                             <td>
                                 <div class="course-name">Економіка підприємства</div>
-								<div class="teacher-name">Гончаренко Маргарита Леонідівна</div>
+                                <div class="teacher-name">Гончаренко Маргарита Леонідівна</div>
                             </td>
                             <td>
                                 <div class="btn-container">
@@ -820,17 +879,17 @@
                                     <a href="https://classroom.google.com/c/ODc2MzgwMTk1Mzc4?cjc=is27syd2" class="btn btn-classroom touch-friendly" target="_blank">
                                         <i class="fas fa-chalkboard-teacher"></i>Classroom
                                     </a>
-								</div>
-								&nbsp;
+                                </div>
+                                &nbsp;
                             </td>
                         </tr>
-						
-						<!-- Рядок 11 -->
+                        
+                        <!-- Рядок 11 -->
                         <tr class="course-row">
                             <td>11</td>
                             <td>
                                 <div class="course-name">Логістика</div>
-								<div class="teacher-name">Непочатова Галина Володимирівна</div>
+                                <div class="teacher-name">Непочатова Галина Володимирівна</div>
                             </td>
                             <td>
                                 <div class="btn-container">
@@ -845,17 +904,17 @@
                                     <a href="https://classroom.google.com/c/ODc2NDM5MDg4MDk0?cjc=zt6xdagt" class="btn btn-classroom touch-friendly" target="_blank">
                                         <i class="fas fa-chalkboard-teacher"></i>Classroom
                                     </a>
-								</div>
-								&nbsp;
+                                </div>
+                                &nbsp;
                             </td>
                         </tr>
 
-						<!-- Рядок 12 -->
+                        <!-- Рядок 12 -->
                         <tr class="course-row">
                             <td>12</td>
                             <td>
                                 <div class="course-name">Фінанси, гроші та кредит</div>
-								<div class="teacher-name">Гончаренко Маргарита Леонідівна</div>
+                                <div class="teacher-name">Гончаренко Маргарита Леонідівна</div>
                             </td>
                             <td>
                                 <div class="btn-container">
@@ -870,8 +929,8 @@
                                     <a href="https://classroom.google.com/c/ODc2NTYyMjE2MTIx?cjc=w4bzrqo7" class="btn btn-classroom touch-friendly" target="_blank">
                                         <i class="fas fa-chalkboard-teacher"></i>Classroom
                                     </a>
-								</div>
-								&nbsp;
+                                </div>
+                                &nbsp;
                             </td>
                         </tr>
                     </tbody>
@@ -879,10 +938,10 @@
             </div>
         </section>
 
-		<div class="note">
+        <div class="note">
             <p><i class="fas fa-exclamation-circle" style="color: #FF0000;"></i> <strong style="color: #FF0000;">Увага!</strong> Не забувайте про можливі перенесення та заміни занять.</p>
             
-            <div class="btn-container" style="margin-top: 8 px;">
+            <div class="btn-container" style="margin-top: 8px;">
                 <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQlLOazl1JOcO5xS1-Ryan5BF2lve26w7lRG-hQTk3J48S8uwm8UtvWJmteeCyqVUtxqJVN7RHUc1I-/pubhtml?gid=0&single=true" class="btn btn-link touch-friendly btn-full" target="_blank">
                     <i class="fas fa-exchange-alt"></i> Заміни занять
                 </a>
@@ -891,7 +950,7 @@
                 </a>
             </div>
         </div>
-		
+        
         <!-- Нова секція з текстовим розкладом -->
         <section class="section">
             <h2 class="section-title"><i class="fas fa-table"></i> Розклад занять у 2 семестрі</h2>
@@ -915,7 +974,7 @@
                             <td>Основи маркетингу</td>
                             <td class="empty-slot">- - -</td>
                             <td><span class="schedule-week-nad">над рис.</span> Вступ до фаху та ФГ /<br>
-                                <span class="schedule-week-pid">під рис.</span> Логістика</td></td>
+                                <span class="schedule-week-pid">під рис.</span> Логістика</td>
                             <td>Вступ до фаху та ФГ</td>
                         </tr>
                         <tr>
@@ -928,7 +987,7 @@
                         </tr>
                         <tr>
                             <td><strong>3</strong><br><div class="teacher-name">12:00-13:20</div></td>
-                            <td>Соціогогія</td>
+                            <td>Соціологія</td>
                             <td class="empty-slot">- - -</td>
                             <td>Логістика</td>
                             <td>Підприємництво та культура бізнесу</td>
@@ -944,13 +1003,13 @@
                                 <span class="schedule-week-pid">під рис.</span> <span class="empty-slot">- - -</span></td>
                             <td>Фінанси, гроші та кредит</td>
                         </tr>
-						<tr>
+                        <tr>
                             <td><strong>5</strong><br><div class="teacher-name">15:00-16:20</div></td>
                             <td class="empty-slot">- - -</td>
                             <td class="empty-slot">- - -</td>
                             <td><span class="schedule-week-nad">над рис.</span> <span class="empty-slot">- - -</span> /<br>
-                                <span class="schedule-week-pid">під рис.</span>Фінанси, гроші та кредит</td>
-							<td class="empty-slot">- - -</td>
+                                <span class="schedule-week-pid">під рис.</span> Фінанси, гроші та кредит</td>
+                            <td class="empty-slot">- - -</td>
                             <td class="empty-slot">- - -</td>
                         </tr>
                     </tbody>
@@ -962,8 +1021,55 @@
                 <i class="fas fa-info-circle"></i> <span class="schedule-week-pid">під рис.</span> – заняття проводяться у тижні під рискою
             </p>
         </section>
-		
-	
+
+        <!-- Секція: Графік освітнього процесу -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Графік освітнього процесу на 2026–2027 н.р.</h2>
+            
+            <table class="edu-process-table">
+                <thead>
+                    <tr>
+                        <th>Етап навчання</th>
+                        <th>Період</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="2" class="edu-process-semester"><i class="fas fa-bookmark"></i> 1 семестр</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fas fa-chalkboard" style="color: var(--primary-green); width: 18px;"></i> Заняття
+                            <div class="edu-process-note">останній тиждень заліковий</div>
+                        </td>
+                        <td class="edu-process-date">01.09 – 28.12</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-umbrella-beach" style="color: var(--light-green); width: 18px;"></i> Канікули</td>
+                        <td><span class="edu-badge-vacation">29.12 – 10.01</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="edu-process-semester"><i class="fas fa-bookmark"></i> 2 семестр</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fas fa-chalkboard" style="color: var(--primary-green); width: 18px;"></i> Заняття
+                            <div class="edu-process-note">останній тиждень заліковий</div>
+                        </td>
+                        <td class="edu-process-date">11.01 – 29.05</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-briefcase" style="color: var(--primary-green); width: 18px;"></i> Практика</td>
+                        <td class="edu-process-date">31.05 – 30.06</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-sun" style="color: var(--light-green); width: 18px;"></i> Канікули</td>
+                        <td><span class="edu-badge-vacation">01.07 – 31.08</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
         <section class="section">
             <h2 class="section-title"><i class="fas fa-calendar-week"></i> Розподіл тижнів</h2>
             
@@ -1027,12 +1133,10 @@
                         <td class="week-nad">22.06.26 - 28.06.26</td>
                         <td class="week-pid">29.06.26 - 05.07.26</td>
                     </tr>
-				-->
+                -->
                 </tbody>
             </table>
         </section>
-        
-        
         
         <footer>
             <p>Група Т-22 / 1 семестр 2026-2027</p>
@@ -1079,10 +1183,8 @@
                 scheduleContainer.addEventListener('click', function(e) {
                     e.stopPropagation();
                     if (scheduleImg.classList.contains('fullscreen')) {
-                        // Якщо вже повний екран - закрити
                         closeFullscreen();
                     } else {
-                        // Якщо не повний екран - відкрити
                         openFullscreen();
                     }
                 });
@@ -1107,10 +1209,8 @@
                         e.preventDefault();
                         
                         if (e.deltaY < 0) {
-                            // Збільшення
                             scale = Math.min(scale + 0.1, 3);
                         } else {
-                            // Зменшення
                             scale = Math.max(scale - 0.1, 0.5);
                         }
                         
@@ -1216,33 +1316,33 @@
             });
                      
             // Виділення поточного тижня
-const today = new Date();
-const weekCells = document.querySelectorAll('.weeks-table td');
+            const today = new Date();
+            const weekCells = document.querySelectorAll('.weeks-table td');
 
-weekCells.forEach(cell => {
-    const cellText = cell.textContent.trim();
-    const dateRange = cellText.split(' - ');
-    
-    if (dateRange.length === 2) {
-        const parseDate = (dateStr) => {
-            const [day, month, year] = dateStr.split('.');
-            return new Date(2000 + parseInt(year), parseInt(month) - 1, parseInt(day));
-        };
-        
-        const startDate = parseDate(dateRange[0]);
-        const endDate = parseDate(dateRange[1]);
-        endDate.setDate(endDate.getDate() + 1); // Включаємо весь останній день
-        
-        if (today >= startDate && today < endDate) {
-            cell.classList.add('current-week');
-            
-            const label = document.createElement('div');
-            label.textContent = 'Поточний тиждень';
-            label.style.cssText = 'font-size:0.75rem;color:#DC143C;font-weight:bold;margin-top:4px;';
-            cell.appendChild(label);
-        }
-    }
-});
+            weekCells.forEach(cell => {
+                const cellText = cell.textContent.trim();
+                const dateRange = cellText.split(' - ');
+                
+                if (dateRange.length === 2) {
+                    const parseDate = (dateStr) => {
+                        const [day, month, year] = dateStr.split('.');
+                        return new Date(2000 + parseInt(year), parseInt(month) - 1, parseInt(day));
+                    };
+                    
+                    const startDate = parseDate(dateRange[0]);
+                    const endDate = parseDate(dateRange[1]);
+                    endDate.setDate(endDate.getDate() + 1);
+                    
+                    if (today >= startDate && today < endDate) {
+                        cell.classList.add('current-week');
+                        
+                        const label = document.createElement('div');
+                        label.textContent = 'Поточний тиждень';
+                        label.style.cssText = 'font-size:0.75rem;color:#DC143C;font-weight:bold;margin-top:4px;';
+                        cell.appendChild(label);
+                    }
+                }
+            });
                   
             // Плавна прокрутка до секцій
             const sectionTitles = document.querySelectorAll('.section-title');
