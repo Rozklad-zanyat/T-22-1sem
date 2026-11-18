@@ -255,58 +255,71 @@
             display: flex;
         }
         
-        /* Таблиця графіка освітнього процесу */
-        .edu-process-table {
-            width: 100%;
-            border-collapse: collapse;
+        /* Графіка освітнього процесу (у 2 стовпчики) */
+        .edu-process-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
             margin-top: 6px;
-            font-size: 0.95rem;
+        }
+
+        .edu-column {
+            background: white;
+            border: 1px solid var(--border-light);
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 3px 10px var(--shadow-light);
         }
 
-        .edu-process-table th {
+        .edu-column-header {
             background-color: var(--primary-green);
             color: white;
             padding: 8px 12px;
-            text-align: left;
             font-weight: 600;
-            border: 1px solid var(--primary-green);
+            text-align: center;
+            font-size: 0.95rem;
         }
 
-        .edu-process-table td {
+        .edu-column-content {
             padding: 8px 12px;
+        }
+
+        .edu-item {
+            padding: 6px 0;
             border-bottom: 1px solid var(--border-light);
-            border-right: 1px solid var(--border-light);
-            background-color: white;
+            font-size: 0.9rem;
             color: var(--text-medium);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .edu-process-semester {
-            background-color: var(--pale-green) !important;
-            color: var(--primary-green) !important;
-            font-weight: 700;
-            border-left: 4px solid var(--primary-green);
+        .edu-item:last-child {
+            border-bottom: none;
         }
 
-        .edu-process-date {
-            font-weight: 600;
+        .edu-item-label {
+            font-weight: 500;
             color: var(--text-dark);
+        }
+
+        .edu-item-date {
+            font-weight: 600;
+            color: var(--primary-green);
             white-space: nowrap;
         }
 
         .edu-process-note {
-            font-size: 0.85rem;
+            font-size: 0.78rem;
             color: var(--text-light);
             font-style: italic;
+            display: block;
         }
 
         .edu-badge-vacation {
-            display: inline-block;
             background-color: var(--pale-green);
             color: var(--primary-green);
-            padding: 2px 8px;
+            padding: 2px 6px;
             border-radius: 6px;
             font-weight: 600;
             font-size: 0.85rem;
@@ -435,16 +448,17 @@
                 font-size: 0.9rem;
             }
             
-            .weeks-table,
-            .edu-process-table {
+            .weeks-table {
                 font-size: 0.9rem;
             }
             
             .weeks-table th,
-            .weeks-table td,
-            .edu-process-table th,
-            .edu-process-table td {
+            .weeks-table td {
                 padding: 6px 8px;
+            }
+
+            .edu-process-grid {
+                grid-template-columns: 1fr; /* На вузьких екранах в один стовпчик для зручності */
             }
         }
         
@@ -953,7 +967,7 @@
         
         <!-- Нова секція з текстовим розкладом -->
         <section class="section">
-            <h2 class="section-title"><i class="fas fa-table"></i> Розклад занять у 2 семестрі</h2>
+            <h2 class="section-title"><i class="fas fa-table"></i> Розклад занять у 1 семестрі</h2>
             
             <div class="text-schedule-container no-scrollbar">
                 <table class="text-schedule-table">
@@ -1021,54 +1035,6 @@
                 <i class="fas fa-info-circle"></i> <span class="schedule-week-pid">під рис.</span> – заняття проводяться у тижні під рискою
             </p>
         </section>
-
-        <!-- Секція: Графік освітнього процесу -->
-        <section class="section">
-            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Графік освітнього процесу на 2026–2027 н.р.</h2>
-            
-            <table class="edu-process-table">
-                <thead>
-                    <tr>
-                        <th>Етап навчання</th>
-                        <th>Період</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td colspan="2" class="edu-process-semester"><i class="fas fa-bookmark"></i> 1 семестр</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <i class="fas fa-chalkboard" style="color: var(--primary-green); width: 18px;"></i> Заняття
-                            <div class="edu-process-note">останній тиждень заліковий</div>
-                        </td>
-                        <td class="edu-process-date">01.09 – 28.12</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fas fa-umbrella-beach" style="color: var(--light-green); width: 18px;"></i> Канікули</td>
-                        <td><span class="edu-badge-vacation">29.12 – 10.01</span></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="edu-process-semester"><i class="fas fa-bookmark"></i> 2 семестр</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <i class="fas fa-chalkboard" style="color: var(--primary-green); width: 18px;"></i> Заняття
-                            <div class="edu-process-note">останній тиждень заліковий</div>
-                        </td>
-                        <td class="edu-process-date">11.01 – 29.05</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fas fa-briefcase" style="color: var(--primary-green); width: 18px;"></i> Практика</td>
-                        <td class="edu-process-date">31.05 – 30.06</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fas fa-sun" style="color: var(--light-green); width: 18px;"></i> Канікули</td>
-                        <td><span class="edu-badge-vacation">01.07 – 31.08</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
         
         <section class="section">
             <h2 class="section-title"><i class="fas fa-calendar-week"></i> Розподіл тижнів</h2>
@@ -1117,25 +1083,55 @@
                         <td class="week-nad">21.12.26 - 27.12.26</td>
                         <td class="week-pid">28.12.26 - 03.01.27</td>
                     </tr>
-             <!--       <tr>
-                        <td class="week-nad">11.05.26 - 17.05.26</td>
-                        <td class="week-pid">18.05.26 - 24.05.26</td>
-                    </tr>
-                    <tr>
-                        <td class="week-nad">25.05.26 - 31.05.26</td>
-                        <td class="week-pid">01.06.26 - 07.06.26</td>
-                    </tr>
-                    <tr>
-                        <td class="week-nad">08.06.26 - 14.06.26</td>
-                        <td class="week-pid">15.06.26 - 21.06.26</td>
-                    </tr>
-                    <tr>
-                        <td class="week-nad">22.06.26 - 28.06.26</td>
-                        <td class="week-pid">29.06.26 - 05.07.26</td>
-                    </tr>
-                -->
                 </tbody>
             </table>
+        </section>
+
+        <!-- Секція: Графік освітнього процесу (2 стовпчики, під розподілом тижнів) -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Графік освітнього процесу на 2026–2027 н.р.</h2>
+            
+            <div class="edu-process-grid">
+                <!-- 1 семестр -->
+                <div class="edu-column">
+                    <div class="edu-column-header"><i class="fas fa-bookmark"></i> 1 семестр</div>
+                    <div class="edu-column-content">
+                        <div class="edu-item">
+                            <div>
+                                <span class="edu-item-label"><i class="fas fa-chalkboard" style="color: var(--primary-green);"></i> Заняття</span>
+                                <span class="edu-process-note">останній тиждень заліковий</span>
+                            </div>
+                            <span class="edu-item-date">01.09 – 28.12</span>
+                        </div>
+                        <div class="edu-item">
+                            <span class="edu-item-label"><i class="fas fa-umbrella-beach" style="color: var(--light-green);"></i> Канікули</span>
+                            <span class="edu-badge-vacation">29.12 – 10.01</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2 семестр -->
+                <div class="edu-column">
+                    <div class="edu-column-header"><i class="fas fa-bookmark"></i> 2 семестр</div>
+                    <div class="edu-column-content">
+                        <div class="edu-item">
+                            <div>
+                                <span class="edu-item-label"><i class="fas fa-chalkboard" style="color: var(--primary-green);"></i> Заняття</span>
+                                <span class="edu-process-note">останній тиждень заліковий</span>
+                            </div>
+                            <span class="edu-item-date">11.01 – 29.05</span>
+                        </div>
+                        <div class="edu-item">
+                            <span class="edu-item-label"><i class="fas fa-briefcase" style="color: var(--primary-green);"></i> Практика</span>
+                            <span class="edu-item-date">31.05 – 30.06</span>
+                        </div>
+                        <div class="edu-item">
+                            <span class="edu-item-label"><i class="fas fa-sun" style="color: var(--light-green);"></i> Канікули</span>
+                            <span class="edu-badge-vacation">01.07 – 31.08</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
         
         <footer>
@@ -1144,177 +1140,7 @@
     </div>
 
     <script>
-        // Оптимізація для мобільних пристроїв
-                
         document.addEventListener('DOMContentLoaded', function() {
-            const scheduleImg = document.getElementById('schedule-img');
-            const scheduleContainer = document.querySelector('.schedule-img-container');
-            
-            if (scheduleImg) {
-                // Створюємо оверлей для повноекранного режиму
-                const overlay = document.createElement('div');
-                overlay.className = 'overlay';
-                document.body.appendChild(overlay);
-                
-                // Створюємо кнопку закриття
-                const closeBtn = document.createElement('button');
-                closeBtn.className = 'close-btn';
-                closeBtn.innerHTML = '<i class="fas fa-times"></i>';
-                document.body.appendChild(closeBtn);
-                
-                // Функція для відкриття повноекранного режиму
-                function openFullscreen() {
-                    scheduleImg.classList.add('fullscreen');
-                    overlay.classList.add('active');
-                    closeBtn.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                }
-                
-                // Функція для закриття повноекранного режиму
-                function closeFullscreen() {
-                    scheduleImg.classList.remove('fullscreen');
-                    scheduleImg.classList.remove('zoomed');
-                    overlay.classList.remove('active');
-                    closeBtn.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                }
-                
-                // Обробник кліку на зображення
-                scheduleContainer.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    if (scheduleImg.classList.contains('fullscreen')) {
-                        closeFullscreen();
-                    } else {
-                        openFullscreen();
-                    }
-                });
-                
-                // Обробник кліку на оверлей
-                overlay.addEventListener('click', closeFullscreen);
-                
-                // Обробник кліку на кнопку закриття
-                closeBtn.addEventListener('click', closeFullscreen);
-                
-                // Закриття по Escape
-                document.addEventListener('keydown', function(e) {
-                    if (e.key === 'Escape' && scheduleImg.classList.contains('fullscreen')) {
-                        closeFullscreen();
-                    }
-                });
-                
-                // Дозвіл масштабування в повноекранному режимі
-                let scale = 1;
-                scheduleImg.addEventListener('wheel', function(e) {
-                    if (scheduleImg.classList.contains('fullscreen')) {
-                        e.preventDefault();
-                        
-                        if (e.deltaY < 0) {
-                            scale = Math.min(scale + 0.1, 3);
-                        } else {
-                            scale = Math.max(scale - 0.1, 0.5);
-                        }
-                        
-                        scheduleImg.style.transform = `scale(${scale})`;
-                        scheduleImg.classList.add('zoomed');
-                    }
-                });
-                
-                // Дозвіл перетягування в повноекранному режимі
-                let isDragging = false;
-                let startX, startY, scrollLeft, scrollTop;
-                
-                scheduleImg.addEventListener('mousedown', function(e) {
-                    if (scheduleImg.classList.contains('fullscreen') && scale > 1) {
-                        isDragging = true;
-                        startX = e.pageX - scheduleImg.offsetLeft;
-                        startY = e.pageY - scheduleImg.offsetTop;
-                        scrollLeft = scheduleImg.scrollLeft;
-                        scrollTop = scheduleImg.scrollTop;
-                        scheduleImg.style.cursor = 'grabbing';
-                    }
-                });
-                
-                document.addEventListener('mousemove', function(e) {
-                    if (!isDragging) return;
-                    e.preventDefault();
-                    const x = e.pageX - scheduleImg.offsetLeft;
-                    const walkX = (x - startX) * 1.5;
-                    scheduleImg.scrollLeft = scrollLeft - walkX;
-                });
-                
-                document.addEventListener('mouseup', function() {
-                    isDragging = false;
-                    if (scheduleImg.classList.contains('fullscreen')) {
-                        scheduleImg.style.cursor = 'grab';
-                    }
-                });
-                
-                // Аналогічно для touch подій для мобільних пристроїв
-                scheduleImg.addEventListener('touchstart', function(e) {
-                    if (scheduleImg.classList.contains('fullscreen') && scale > 1) {
-                        isDragging = true;
-                        startX = e.touches[0].pageX - scheduleImg.offsetLeft;
-                        startY = e.touches[0].pageY - scheduleImg.offsetTop;
-                        scrollLeft = scheduleImg.scrollLeft;
-                        scrollTop = scheduleImg.scrollTop;
-                    }
-                });
-                
-                scheduleImg.addEventListener('touchmove', function(e) {
-                    if (!isDragging) return;
-                    e.preventDefault();
-                    const x = e.touches[0].pageX - scheduleImg.offsetLeft;
-                    const walkX = (x - startX) * 1.5;
-                    scheduleImg.scrollLeft = scrollLeft - walkX;
-                });
-                
-                scheduleImg.addEventListener('touchend', function() {
-                    isDragging = false;
-                });
-                
-                // Пінч-зум для мобільних пристроїв
-                let initialDistance = null;
-                
-                scheduleImg.addEventListener('touchstart', function(e) {
-                    if (e.touches.length === 2 && scheduleImg.classList.contains('fullscreen')) {
-                        initialDistance = Math.hypot(
-                            e.touches[0].pageX - e.touches[1].pageX,
-                            e.touches[0].pageY - e.touches[1].pageY
-                        );
-                    }
-                });
-                
-                scheduleImg.addEventListener('touchmove', function(e) {
-                    if (e.touches.length === 2 && initialDistance !== null && scheduleImg.classList.contains('fullscreen')) {
-                        e.preventDefault();
-                        const currentDistance = Math.hypot(
-                            e.touches[0].pageX - e.touches[1].pageX,
-                            e.touches[0].pageY - e.touches[1].pageY
-                        );
-                        
-                        const delta = (currentDistance - initialDistance) * 0.01;
-                        scale = Math.max(0.5, Math.min(3, scale + delta));
-                        scheduleImg.style.transform = `scale(${scale})`;
-                        scheduleImg.classList.add('zoomed');
-                        initialDistance = currentDistance;
-                    }
-                });
-                
-                scheduleImg.addEventListener('touchend', function() {
-                    initialDistance = null;
-                });
-            }
-            
-            // Підтвердження переходу за зовнішніми посиланнями
-            const externalLinks = document.querySelectorAll('a[target="_blank"]');
-            externalLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    if (!confirm('Перейти за посиланням?')) {
-                        e.preventDefault();
-                    }
-                });
-            });
-                     
             // Виділення поточного тижня
             const today = new Date();
             const weekCells = document.querySelectorAll('.weeks-table td');
@@ -1354,7 +1180,6 @@
                 });
             });
         });
-        
     </script>
 </body>
 </html>
