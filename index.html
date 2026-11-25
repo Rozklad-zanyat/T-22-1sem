@@ -42,10 +42,7 @@
             -webkit-font-smoothing: antialiased;
         }
         
-        .container {
-            max-width: 100%;
-            margin: 0 auto;
-        }
+        .container { max-width: 100%; margin: 0 auto; }
         
         header {
             background: linear-gradient(145deg, #ffffff, var(--pale-green));
@@ -60,18 +57,8 @@
             text-align: center;
         }
         
-        h1 {
-            font-size: 1.7rem;
-            margin-bottom: 4px;
-            color: var(--primary-green);
-            font-weight: 700;
-        }
-        
-        .subtitle {
-            font-size: 1.05rem;
-            color: var(--text-medium);
-            font-weight: 500;
-        }
+        h1 { font-size: 1.7rem; margin-bottom: 4px; color: var(--primary-green); font-weight: 700; }
+        .subtitle { font-size: 1.05rem; color: var(--text-medium); font-weight: 500; }
         
         .section {
             background-color: var(--bg-card);
@@ -94,7 +81,6 @@
             font-weight: 600;
         }
         
-        /* Таблиця курсів */
         .courses-container {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
@@ -136,30 +122,15 @@
         .courses-table th:nth-child(3),
         .courses-table td:nth-child(3),
         .courses-table th:nth-child(4),
-        .courses-table td:nth-child(4) {
-            width: 25%;
-        }
+        .courses-table td:nth-child(4) { width: 25%; }
         
         .courses-table th:first-child,
-        .courses-table td:first-child {
-            width: 5%;
-        }
+        .courses-table td:first-child { width: 5%; }
         
-        .course-row:nth-child(even) td {
-            background-color: var(--bg-light);
-        }
+        .course-row:nth-child(even) td { background-color: var(--bg-light); }
+        .course-row:hover td { background-color: var(--pale-green); }
         
-        .course-row:hover td {
-            background-color: var(--pale-green);
-        }
-        
-        /* Кнопки */
-        .btn-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 4px;
-        }
+        .btn-container { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
         
         .btn {
             display: flex;
@@ -176,60 +147,20 @@
             gap: 10px;
         }
         
-        .btn-classroom {
-            background-color: var(--primary-green);
-            color: white;
-            border: 1px solid var(--secondary-green);
-        }
+        .btn-classroom { background-color: var(--primary-green); color: white; border: 1px solid var(--secondary-green); }
+        .btn-classroom:active { background-color: var(--secondary-green); transform: translateY(1px); box-shadow: 0 2px 8px rgba(46, 125, 50, 0.3); }
         
-        .btn-classroom:active {
-            background-color: var(--secondary-green);
-            transform: translateY(1px);
-            box-shadow: 0 2px 8px rgba(46, 125, 50, 0.3);
-        }
+        .btn-video { background-color: white; color: var(--primary-green); border: 2px solid var(--primary-green); }
+        .btn-video:active { background-color: var(--pale-green); transform: translateY(1px); box-shadow: 0 2px 8px rgba(46, 125, 50, 0.2); }
         
-        .btn-video {
-            background-color: white;
-            color: var(--primary-green);
-            border: 2px solid var(--primary-green);
-        }
+        .btn-link { background-color: white; color: var(--primary-green); border: 2px solid var(--primary-green); margin-top: 8px; }
+        .btn-link:active { background-color: var(--pale-green); transform: translateY(1px); box-shadow: 0 2px 8px rgba(46, 125, 50, 0.2); }
         
-        .btn-video:active {
-            background-color: var(--pale-green);
-            transform: translateY(1px);
-            box-shadow: 0 2px 8px rgba(46, 125, 50, 0.2);
-        }
+        .btn-full { width: 100%; }
         
-        .btn-link {
-            background-color: white;
-            color: var(--primary-green);
-            border: 2px solid var(--primary-green);
-            margin-top: 8px;
-        }
+        .btn-sm { padding: 6px 10px; font-size: 0.8rem; border-radius: 8px; gap: 6px; }
+        .btn-sm.btn-link { margin-top: 4px; }
         
-        .btn-link:active {
-            background-color: var(--pale-green);
-            transform: translateY(1px);
-            box-shadow: 0 2px 8px rgba(46, 125, 50, 0.2);
-        }
-        
-        .btn-full {
-            width: 100%;
-        }
-        
-        /* Зменшені кнопки в блоці замін */
-        .btn-sm {
-            padding: 6px 10px;
-            font-size: 0.8rem;
-            border-radius: 8px;
-            gap: 6px;
-        }
-        
-        .btn-sm.btn-link {
-            margin-top: 4px;
-        }
-        
-        /* Індикатор поточного тижня під заголовком розкладу */
         .current-week-indicator {
             display: flex;
             align-items: center;
@@ -246,31 +177,11 @@
             border: 1px solid var(--light-green);
         }
         
-        .current-week-indicator.nad {
-            background: #f3e5f5;
-            color: #6a1b9a;
-            border-color: #ab47bc;
-        }
+        .current-week-indicator.nad { background: #f3e5f5; color: #6a1b9a; border-color: #ab47bc; }
+        .current-week-indicator.pid { background: #e3f2fd; color: #0d47a1; border-color: #42a5f5; }
+        .current-week-indicator.outside { background: #fff3e0; color: #e65100; border-color: #ffb74d; }
         
-        .current-week-indicator.pid {
-            background: #e3f2fd;
-            color: #0d47a1;
-            border-color: #42a5f5;
-        }
-        
-        .current-week-indicator.outside {
-            background: #fff3e0;
-            color: #e65100;
-            border-color: #ffb74d;
-        }
-        
-        /* Графіка освітнього процесу */
-        .edu-process-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 6px;
-        }
+        .edu-process-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
         
         .edu-column {
             background: white;
@@ -289,9 +200,7 @@
             font-size: 0.95rem;
         }
         
-        .edu-column-content {
-            padding: 8px 12px;
-        }
+        .edu-column-content { padding: 8px 12px; }
         
         .edu-item {
             padding: 6px 0;
@@ -303,27 +212,11 @@
             align-items: center;
         }
         
-        .edu-item:last-child {
-            border-bottom: none;
-        }
+        .edu-item:last-child { border-bottom: none; }
+        .edu-item-label { font-weight: 500; color: var(--text-dark); }
+        .edu-item-date { font-weight: 600; color: var(--primary-green); white-space: nowrap; }
         
-        .edu-item-label {
-            font-weight: 500;
-            color: var(--text-dark);
-        }
-        
-        .edu-item-date {
-            font-weight: 600;
-            color: var(--primary-green);
-            white-space: nowrap;
-        }
-        
-        .edu-process-note {
-            font-size: 0.78rem;
-            color: var(--text-light);
-            font-style: italic;
-            display: block;
-        }
+        .edu-process-note { font-size: 0.78rem; color: var(--text-light); font-style: italic; display: block; }
         
         .edu-badge-vacation {
             background-color: var(--pale-green);
@@ -335,7 +228,6 @@
             border: 1px solid var(--light-green);
         }
         
-        /* Таблиця тижнів */
         .weeks-table {
             width: 100%;
             border-collapse: collapse;
@@ -363,50 +255,9 @@
             background-color: white;
         }
         
-        .week-nad {
-            background-color: var(--pale-green);
-            color: var(--text-dark);
-            font-weight: 600;
-            border-left: 4px solid var(--primary-green);
-        }
+        .week-nad { background-color: var(--pale-green); color: var(--text-dark); font-weight: 600; border-left: 4px solid var(--primary-green); }
+        .week-pid { background-color: white; color: var(--text-medium); border-left: 4px solid var(--light-green); }
         
-        .week-pid {
-            background-color: white;
-            color: var(--text-medium);
-            border-left: 4px solid var(--light-green);
-        }
-        
-        /* Інформаційні блоки */
-        .info-badge {
-            display: inline-block;
-            background-color: var(--pale-green);
-            color: var(--text-medium);
-            padding: 6px 8px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            margin-top: 6px;
-            border: 1px solid var(--light-green);
-            width: 100%;
-            text-align: center;
-            font-family: monospace;
-        }
-        
-        .note {
-            background-color: var(--pale-green);
-            padding: 16px 22px;
-            border-radius: 14px;
-            border-left: 5px solid var(--primary-green);
-            margin-top: 8px;
-            font-style: normal;
-            border: 1px solid var(--border-light);
-            box-shadow: 0 4px 12px var(--shadow-light);
-        }
-        
-        .note strong {
-            color: var(--primary-green);
-        }
-        
-        /* Блок замін */
         #replacement-section {
             background: var(--bg-white);
             border: 1px solid var(--border-light);
@@ -427,11 +278,7 @@
             margin-bottom: 8px;
         }
         
-        #replacement-list {
-            font-size: 0.9rem;
-            color: var(--text-medium);
-            line-height: 1.6;
-        }
+        #replacement-list { font-size: 0.9rem; color: var(--text-medium); line-height: 1.6; }
         
         .replacement-item {
             background: var(--danger-bg);
@@ -442,9 +289,7 @@
             color: var(--text-dark);
         }
         
-        .replacement-item:last-child {
-            margin-bottom: 0;
-        }
+        .replacement-item:last-child { margin-bottom: 0; }
         
         .replacement-item .repl-date {
             font-weight: 700;
@@ -454,32 +299,13 @@
             letter-spacing: 0.3px;
         }
         
-        .replacement-item .repl-pair {
-            font-weight: 700;
-            color: var(--primary-green);
-        }
+        .replacement-item .repl-pair { font-weight: 700; color: var(--primary-green); }
+        .replacement-item .repl-subject { font-weight: 600; }
+        .replacement-item .repl-teacher { color: var(--text-medium); font-size: 0.85rem; }
         
-        .replacement-item .repl-subject {
-            font-weight: 600;
-        }
+        .no-replacements { color: var(--text-medium); font-style: italic; padding: 6px 0; }
+        .loading-replacements { color: var(--text-light); font-style: italic; }
         
-        .replacement-item .repl-teacher {
-            color: var(--text-medium);
-            font-size: 0.85rem;
-        }
-        
-        .no-replacements {
-            color: var(--text-medium);
-            font-style: italic;
-            padding: 6px 0;
-        }
-        
-        .loading-replacements {
-            color: var(--text-light);
-            font-style: italic;
-        }
-        
-        /* Підсвічування клітинок розкладу із заміною */
         .text-schedule-table td.replacement-highlight {
             background-color: #ffcdd2 !important;
             border: 2px solid #e53935 !important;
@@ -501,7 +327,6 @@
             letter-spacing: 0.3px;
         }
         
-        /* Футер */
         footer {
             text-align: center;
             margin-top: 20px;
@@ -512,113 +337,41 @@
             line-height: 1.4;
         }
         
-        /* Мобільні адаптації */
         @media (max-width: 480px) {
-            body {
-                font-size: 14px;
-                padding: 8px;
-            }
-            
-            header {
-                padding: 14px 12px;
-                border-radius: 14px;
-            }
-            
-            h1 {
-                font-size: 1.5rem;
-            }
-            
-            .subtitle {
-                font-size: 1rem;
-            }
-            
-            .section {
-                padding: 12px 10px;
-                border-radius: 14px;
-            }
-            
-            .section-title {
-                font-size: 1.25rem;
-            }
-            
-            .courses-table th,
-            .courses-table td {
-                padding: 8px 8px;
-                font-size: 0.8rem;
-            }
-            
-            .btn {
-                padding: 8px 12px;
-                font-size: 0.9rem;
-            }
-            
-            .btn-sm {
-                padding: 5px 8px;
-                font-size: 0.75rem;
-            }
-            
-            .weeks-table {
-                font-size: 0.9rem;
-            }
-            
-            .weeks-table th,
-            .weeks-table td {
-                padding: 6px 8px;
-            }
-            
-            .edu-process-grid {
-                grid-template-columns: 1fr;
-            }
+            body { font-size: 14px; padding: 8px; }
+            header { padding: 14px 12px; border-radius: 14px; }
+            h1 { font-size: 1.5rem; }
+            .subtitle { font-size: 1rem; }
+            .section { padding: 12px 10px; border-radius: 14px; }
+            .section-title { font-size: 1.25rem; }
+            .courses-table th, .courses-table td { padding: 8px 8px; font-size: 0.8rem; }
+            .btn { padding: 8px 12px; font-size: 0.9rem; }
+            .btn-sm { padding: 5px 8px; font-size: 0.75rem; }
+            .weeks-table { font-size: 0.9rem; }
+            .weeks-table th, .weeks-table td { padding: 6px 8px; }
+            .edu-process-grid { grid-template-columns: 1fr; }
         }
         
         @media (max-width: 360px) {
-            h1 {
-                font-size: 1.4rem;
-            }
-            
-            .section-title {
-                font-size: 1.15rem;
-            }
-            
-            .courses-table {
-                min-width: 650px;
-            }
+            h1 { font-size: 1.4rem; }
+            .section-title { font-size: 1.15rem; }
+            .courses-table { min-width: 650px; }
         }
         
-        /* Анімації */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        .section {
-            animation: fadeIn 0.4s ease-out;
-        }
+        .section { animation: fadeIn 0.4s ease-out; }
         
-        .touch-friendly {
-            padding: 6px;
-            min-height: 42px;
-        }
+        .touch-friendly { padding: 6px; min-height: 42px; }
         
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
         
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .teacher-name {
-            font-size: 0.86rem;
-            color: var(--text-light);
-            margin-top: 2px;
-        }
-        
-        .course-name {
-            font-weight: 500;
-            color: var(--text-dark);
-        }
+        .teacher-name { font-size: 0.86rem; color: var(--text-light); margin-top: 2px; }
+        .course-name { font-weight: 500; color: var(--text-dark); }
         
         .current-week {
             box-shadow: 0 0 0 3px var(--light-green) !important;
@@ -626,7 +379,6 @@
             font-weight: bold !important;
         }
         
-        /* Таблиця розкладу */
         .text-schedule-container {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
@@ -666,47 +418,15 @@
             text-align: center;
         }
         
-        .text-schedule-table td:nth-child(1) {
-            background-color: var(--pale-green);
-            font-weight: 600;
-            color: var(--text-dark);
-        }
+        .text-schedule-table td:nth-child(1) { background-color: var(--pale-green); font-weight: 600; color: var(--text-dark); }
+        .text-schedule-table tr:nth-child(even) td { background-color: var(--bg-light); }
+        .text-schedule-table tr:nth-child(even) td:nth-child(1) { background-color: var(--pale-green); }
+        .text-schedule-table tr:hover td { background-color: #f0f8f0; }
+        .text-schedule-table tr:hover td:nth-child(1) { background-color: #e0f0e0; }
         
-        .text-schedule-table tr:nth-child(even) td {
-            background-color: var(--bg-light);
-        }
-        
-        .text-schedule-table tr:nth-child(even) td:nth-child(1) {
-            background-color: var(--pale-green);
-        }
-        
-        .text-schedule-table tr:hover td {
-            background-color: #f0f8f0;
-        }
-        
-        .text-schedule-table tr:hover td:nth-child(1) {
-            background-color: #e0f0e0;
-        }
-        
-        .schedule-week-nad {
-            color: #800080;
-            font-weight: 600;
-            font-size: 0.65rem;
-            font-style: italic;
-        }
-        
-        .schedule-week-pid {
-            color: #0000FF;
-            font-weight: 600;
-            font-size: 0.65rem;
-            font-style: italic;
-        }
-        
-        .empty-slot {
-            color: var(--text-light);
-            font-weight: 600;
-            font-style: italic;
-        }
+        .schedule-week-nad { color: #800080; font-weight: 600; font-size: 0.65rem; font-style: italic; }
+        .schedule-week-pid { color: #0000FF; font-weight: 600; font-size: 0.65rem; font-style: italic; }
+        .empty-slot { color: var(--text-light); font-weight: 600; font-style: italic; }
     </style>
 </head>
 <body>
@@ -845,10 +565,8 @@
                                         <i class="fas fa-chalkboard-teacher"></i>Classroom
                                     </a>
                                 </div>
-                                &nbsp;
                             </td>
                         </tr>
-                        
                         <tr class="course-row">
                             <td>2</td>
                             <td>
@@ -870,7 +588,6 @@
                                 </div>
                             </td>
                         </tr>
-                        
                         <tr class="course-row">
                             <td>3</td>
                             <td>
@@ -891,10 +608,8 @@
                                         <i class="fas fa-chalkboard-teacher"></i>Classroom
                                     </a>
                                 </div>
-                                &nbsp;
                             </td>
                         </tr>
-                        
                         <tr class="course-row">
                             <td>4</td>
                             <td>
@@ -915,10 +630,8 @@
                                         <i class="fas fa-chalkboard-teacher"></i>Classroom
                                     </a>
                                 </div>
-                                &nbsp;
                             </td>
                         </tr>
-                        
                         <tr class="course-row">
                             <td>5</td>
                             <td>
@@ -939,10 +652,8 @@
                                         <i class="fas fa-chalkboard-teacher"></i>Classroom
                                     </a>
                                 </div>
-                                &nbsp;
                             </td>
                         </tr>
-                        
                         <tr class="course-row">
                             <td>6</td>
                             <td>
@@ -963,10 +674,8 @@
                                         <i class="fas fa-chalkboard-teacher"></i>Classroom
                                     </a>
                                 </div>
-                                &nbsp;
                             </td>
                         </tr>
-                        
                         <tr class="course-row">
                             <td>7</td>
                             <td>
@@ -988,7 +697,6 @@
                                 </div>
                             </td>
                         </tr>
-                        
                         <tr class="course-row">
                             <td>8</td>
                             <td>
@@ -1009,10 +717,8 @@
                                         <i class="fas fa-chalkboard-teacher"></i>Classroom
                                     </a>
                                 </div>
-                                &nbsp;
                             </td>
                         </tr>
-                        
                         <tr class="course-row">
                             <td>9</td>
                             <td>
@@ -1033,10 +739,8 @@
                                         <i class="fas fa-chalkboard-teacher"></i>Classroom
                                     </a>
                                 </div>
-                                &nbsp;
                             </td>
                         </tr>
-                        
                         <tr class="course-row">
                             <td>10</td>
                             <td>
@@ -1057,10 +761,8 @@
                                         <i class="fas fa-chalkboard-teacher"></i>Classroom
                                     </a>
                                 </div>
-                                &nbsp;
                             </td>
                         </tr>
-                        
                         <tr class="course-row">
                             <td>11</td>
                             <td>
@@ -1081,10 +783,8 @@
                                         <i class="fas fa-chalkboard-teacher"></i>Classroom
                                     </a>
                                 </div>
-                                &nbsp;
                             </td>
                         </tr>
-                        
                         <tr class="course-row">
                             <td>12</td>
                             <td>
@@ -1105,7 +805,6 @@
                                         <i class="fas fa-chalkboard-teacher"></i>Classroom
                                     </a>
                                 </div>
-                                &nbsp;
                             </td>
                         </tr>
                     </tbody>
@@ -1134,7 +833,6 @@
                         </div>
                     </div>
                 </div>
-                
                 <div class="edu-column">
                     <div class="edu-column-header"><i class="fas fa-bookmark"></i> 2 семестр</div>
                     <div class="edu-column-content">
@@ -1170,42 +868,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="week-nad">31.08.26 - 06.09.26</td>
-                        <td class="week-pid">07.09.26 - 13.09.26</td>
-                    </tr>
-                    <tr>
-                        <td class="week-nad">14.09.26 - 20.09.26</td>
-                        <td class="week-pid">21.09.26 - 27.09.26</td>
-                    </tr>
-                    <tr>
-                        <td class="week-nad">28.09.26 - 04.10.26</td>
-                        <td class="week-pid">05.10.26 - 11.10.26</td>
-                    </tr>
-                    <tr>
-                        <td class="week-nad">12.10.26 - 18.10.26</td>
-                        <td class="week-pid">19.10.26 - 25.10.26</td>
-                    </tr>
-                    <tr>
-                        <td class="week-nad">26.10.26 - 01.11.26</td>
-                        <td class="week-pid">02.11.26 - 08.11.26</td>
-                    </tr>
-                    <tr>
-                        <td class="week-nad">09.11.26 - 15.11.26</td>
-                        <td class="week-pid">16.11.26 - 22.11.26</td>
-                    </tr>
-                    <tr>
-                        <td class="week-nad">23.11.26 - 29.11.26</td>
-                        <td class="week-pid">30.11.26 - 06.12.26</td>
-                    </tr>
-                    <tr>
-                        <td class="week-nad">07.12.26 - 13.12.26</td>
-                        <td class="week-pid">14.12.26 - 20.12.26</td>
-                    </tr>
-                    <tr>
-                        <td class="week-nad">21.12.26 - 27.12.26</td>
-                        <td class="week-pid">28.12.26 - 03.01.27</td>
-                    </tr>
+                    <tr><td class="week-nad">31.08.26 - 06.09.26</td><td class="week-pid">07.09.26 - 13.09.26</td></tr>
+                    <tr><td class="week-nad">14.09.26 - 20.09.26</td><td class="week-pid">21.09.26 - 27.09.26</td></tr>
+                    <tr><td class="week-nad">28.09.26 - 04.10.26</td><td class="week-pid">05.10.26 - 11.10.26</td></tr>
+                    <tr><td class="week-nad">12.10.26 - 18.10.26</td><td class="week-pid">19.10.26 - 25.10.26</td></tr>
+                    <tr><td class="week-nad">26.10.26 - 01.11.26</td><td class="week-pid">02.11.26 - 08.11.26</td></tr>
+                    <tr><td class="week-nad">09.11.26 - 15.11.26</td><td class="week-pid">16.11.26 - 22.11.26</td></tr>
+                    <tr><td class="week-nad">23.11.26 - 29.11.26</td><td class="week-pid">30.11.26 - 06.12.26</td></tr>
+                    <tr><td class="week-nad">07.12.26 - 13.12.26</td><td class="week-pid">14.12.26 - 20.12.26</td></tr>
+                    <tr><td class="week-nad">21.12.26 - 27.12.26</td><td class="week-pid">28.12.26 - 03.01.27</td></tr>
                 </tbody>
             </table>
         </section>
@@ -1228,30 +899,22 @@
             weekCells.forEach(cell => {
                 const cellText = cell.textContent.trim();
                 const dateRange = cellText.split(' - ');
-                
                 if (dateRange.length === 2) {
-                    const parseDate = (dateStr) => {
-                        const [day, month, year] = dateStr.split('.');
-                        return new Date(2000 + parseInt(year), parseInt(month) - 1, parseInt(day));
+                    const parseDate = (s) => {
+                        const [d, m, y] = s.split('.');
+                        return new Date(2000 + parseInt(y), parseInt(m) - 1, parseInt(d));
                     };
-                    
                     const startDate = parseDate(dateRange[0]);
                     const endDate = parseDate(dateRange[1]);
                     endDate.setDate(endDate.getDate() + 1);
-                    
                     if (today >= startDate && today < endDate) {
                         cell.classList.add('current-week');
-                        
                         const label = document.createElement('div');
                         label.textContent = 'Поточний тиждень';
                         label.style.cssText = 'font-size:0.75rem;color:#DC143C;font-weight:bold;margin-top:4px;';
                         cell.appendChild(label);
-                        
-                        if (cell.classList.contains('week-nad')) {
-                            currentWeekType = 'nad';
-                        } else if (cell.classList.contains('week-pid')) {
-                            currentWeekType = 'pid';
-                        }
+                        if (cell.classList.contains('week-nad')) currentWeekType = 'nad';
+                        else if (cell.classList.contains('week-pid')) currentWeekType = 'pid';
                     }
                 }
             });
@@ -1272,17 +935,19 @@
             // ============================================================
             //  ПЛАВНА ПРОКРУТКА ДО СЕКЦІЙ
             // ============================================================
-            const sectionTitles = document.querySelectorAll('.section-title');
-            sectionTitles.forEach(title => {
+            document.querySelectorAll('.section-title').forEach(title => {
                 title.style.cursor = 'pointer';
                 title.addEventListener('click', function() {
-                    const section = this.closest('.section');
-                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    this.closest('.section').scrollIntoView({ behavior: 'smooth', block: 'start' });
                 });
             });
             
             // ============================================================
             //  ПЕРЕВІРКА ЗАМІН З GOOGLE-ТАБЛИЦІ
+            //  Таблиця має блокову структуру:
+            //    [Дата] [26.11.2026] [четвер] [Тиждень НАД рискою]
+            //    [Група] [ (порожньо = Пара) ] [Освітній компонент] [Аудит] [Викладач]
+            //    [Т-22] [1] [Вища математика] [301] [Петренко]
             // ============================================================
             const SHEET_ID = '1QIn-Hnj49b32rjwrMaay_TRu-UQjA6YTb9Um2lzmUOk';
             const SHEET_JSON_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=0`;
@@ -1292,9 +957,8 @@
             
             function normalizeDate(str) {
                 if (!str) return '';
-                str = String(str).trim();
-                const parts = str.match(/(\d{1,4})[./-](\d{1,2})[./-](\d{1,4})/);
-                if (!parts) return str;
+                const parts = String(str).match(/(\d{1,4})[./-](\d{1,2})[./-](\d{1,4})/);
+                if (!parts) return String(str).trim();
                 let day = parseInt(parts[1], 10);
                 let month = parseInt(parts[2], 10);
                 let year = parseInt(parts[3], 10);
@@ -1316,7 +980,6 @@
                 
                 let headers = data.table.cols.map(c => (c && c.label) ? String(c.label) : '');
                 const labelsEmpty = headers.every(h => !h.trim());
-                
                 const rows = (data.table.rows || []).map(r =>
                     (r.c || []).map(cell => {
                         if (!cell) return '';
@@ -1325,7 +988,6 @@
                         return '';
                     })
                 );
-                
                 if (labelsEmpty && rows.length > 0) {
                     headers = rows[0];
                     return [headers, ...rows.slice(1)];
@@ -1333,12 +995,172 @@
                 return [headers, ...rows];
             }
             
-            function findColumnIndex(headers, keywords) {
-                for (let i = 0; i < headers.length; i++) {
-                    const h = String(headers[i] || '').toLowerCase();
-                    if (keywords.some(k => h.includes(k))) return i;
+            /**
+             * Розбирає блокову структуру таблиці замін.
+             * Повертає масив об'єктів {date, group, pair, time, subject, audit, teacher}.
+             */
+            function parseReplacementsData(data) {
+                const result = [];
+                let currentDate = '';
+                let headerRow = -1;
+                let colMap = {};
+                let lastGroup = '';
+                
+                for (let r = 0; r < data.length; r++) {
+                    const row = data[r] || [];
+                    const first = String(row[0] || '').trim().toLowerCase();
+                    
+                    // Рядок-заголовок блоку: "Дата | 26.11.2026 | четвер | Тиждень ..."
+                    if (first === 'дата' || first.startsWith('дата')) {
+                        let dateStr = String(row[1] || '').trim();
+                        if (!/\d/.test(dateStr)) dateStr = String(row[0] || '').trim();
+                        currentDate = normalizeDate(dateStr);
+                        headerRow = -1;
+                        colMap = {};
+                        lastGroup = '';
+                        continue;
+                    }
+                    
+                    // Рядок з назвами колонок: "Група | (порожньо) | Освітній компонент | Аудит | Викладач"
+                    if (first.includes('група') && headerRow === -1) {
+                        colMap = {};
+                        for (let c = 0; c < row.length; c++) {
+                            const h = String(row[c] || '').toLowerCase().trim();
+                            if (!h) continue;
+                            if (h.includes('група') || h === 'гр' || h === 'гр.') colMap.group = c;
+                            else if (h.includes('освітн') || h.includes('компонент') || h.includes('предмет') || h.includes('дисциплін') || h.includes('назва')) colMap.subject = c;
+                            else if (h.includes('аудит') || h === 'ауд' || h === 'ауд.' || h.includes('каб')) colMap.audit = c;
+                            else if (h.includes('викладач') || h.includes('піб') || h.includes('викл')) colMap.teacher = c;
+                            else if (h.includes('пара') || h === '№' || h === '№ п.' || h.includes('номер')) colMap.pair = c;
+                            else if (h.includes('час') || h.includes('годин')) colMap.time = c;
+                        }
+                        // Якщо «Пара» не знайдена, але є порожня колонка між «Група» та «Освітній компонент» — вважаємо її «Парою»
+                        if (colMap.pair === undefined && colMap.group !== undefined && colMap.subject !== undefined) {
+                            if (colMap.subject - colMap.group === 2) {
+                                colMap.pair = colMap.group + 1;
+                            }
+                        }
+                        headerRow = r;
+                        continue;
+                    }
+                    
+                    // Рядок даних
+                    if (headerRow !== -1 && currentDate && colMap.group !== undefined) {
+                        let group = String(row[colMap.group] || '').trim();
+                        if (group) lastGroup = group;
+                        else group = lastGroup; // об'єднані клітинки
+                        
+                        if (!group) continue;
+                        if (!group.toLowerCase().includes(GROUP_NAME.toLowerCase())) continue;
+                        
+                        const subject = colMap.subject !== undefined ? String(row[colMap.subject] || '').trim() : '';
+                        if (!subject) continue;
+                        
+                        result.push({
+                            date: currentDate,
+                            group: group,
+                            pair: colMap.pair !== undefined ? String(row[colMap.pair] || '').trim() : '',
+                            time: colMap.time !== undefined ? String(row[colMap.time] || '').trim() : '',
+                            subject: subject,
+                            audit: colMap.audit !== undefined ? String(row[colMap.audit] || '').trim() : '',
+                            teacher: colMap.teacher !== undefined ? String(row[colMap.teacher] || '').trim() : ''
+                        });
+                    }
                 }
+                return result;
+            }
+            
+            function getDayColumn() {
+                const day = new Date().getDay(); // 0=Нд, 1=Пн, ..., 6=Сб
+                if (day >= 1 && day <= 5) return day; // Пн=1, Вт=2, Ср=3, Чт=4, Пт=5
                 return -1;
+            }
+            
+            function renderReplacements(replacements) {
+                let html = '';
+                replacements.forEach(r => {
+                    html += `<div class="replacement-item">`;
+                    html += `<div class="repl-date"><i class="fas fa-calendar-day"></i> ${escapeHtml(r.date)}</div>`;
+                    if (r.pair || r.time) {
+                        html += `<div class="repl-pair">`;
+                        if (r.pair) html += `${escapeHtml(r.pair)} пара`;
+                        if (r.time) html += `${r.pair ? ' (' : ''}${escapeHtml(r.time)}${r.pair ? ')' : ''}`;
+                        html += `</div>`;
+                    }
+                    if (r.subject) html += `<div class="repl-subject">${escapeHtml(r.subject)}</div>`;
+                    if (r.audit) html += `<div class="repl-teacher"><i class="fas fa-door-open"></i> Ауд. ${escapeHtml(r.audit)}</div>`;
+                    if (r.teacher) html += `<div class="repl-teacher"><i class="fas fa-user"></i> ${escapeHtml(r.teacher)}</div>`;
+                    html += `</div>`;
+                });
+                replacementListEl.innerHTML = html;
+            }
+            
+            function showNoReplacements(allReplacements) {
+                let html = '<span class="no-replacements">Поточних замін немає</span>';
+                
+                if (allReplacements && allReplacements.length > 0) {
+                    const now = new Date();
+                    now.setHours(0, 0, 0, 0);
+                    const upcoming = allReplacements
+                        .filter(r => {
+                            const [d, m, y] = r.date.split('.').map(Number);
+                            const rDate = new Date(y, m - 1, d);
+                            return rDate > now;
+                        })
+                        .sort((a, b) => {
+                            const da = a.date.split('.').map(Number);
+                            const db = b.date.split('.').map(Number);
+                            return new Date(da[2], da[1] - 1, da[0]) - new Date(db[2], db[1] - 1, db[0]);
+                        });
+                    if (upcoming.length > 0) {
+                        const nextDate = upcoming[0].date;
+                        const count = upcoming.filter(x => x.date === nextDate).length;
+                        html += `<div style="margin-top:10px;padding:8px 12px;background:#fff8e1;border-left:4px solid #ff9800;border-radius:6px;font-size:0.85rem;color:#424242;">
+                            <i class="fas fa-info-circle" style="color:#ff9800;"></i>
+                            Найближчі заміни: <strong>${escapeHtml(nextDate)}</strong> (${count} ${count === 1 ? 'заміна' : 'замін'})
+                        </div>`;
+                    }
+                }
+                replacementListEl.innerHTML = html;
+            }
+            
+            function highlightSchedule(replacements) {
+                const dayCol = getDayColumn();
+                const scheduleRows = document.querySelectorAll('.text-schedule-table tbody tr');
+                
+                replacements.forEach(r => {
+                    // Спроба 1: точне підсвічування за номером пари та днем тижня
+                    const pairMatch = String(r.pair || '').match(/\d+/);
+                    if (pairMatch && dayCol !== -1) {
+                        const pairNum = parseInt(pairMatch[0], 10);
+                        if (pairNum >= 1 && pairNum <= scheduleRows.length) {
+                            const cell = scheduleRows[pairNum - 1].cells[dayCol];
+                            if (cell && !cell.textContent.includes('- - -')) {
+                                cell.classList.add('replacement-highlight');
+                                return;
+                            }
+                        }
+                    }
+                    
+                    // Спроба 2: пошук за назвою предмета
+                    if (r.subject) {
+                        const subjectLower = r.subject.toLowerCase().replace(/\s+/g, ' ').trim();
+                        document.querySelectorAll('.text-schedule-table td').forEach(cell => {
+                            if (cell.cellIndex === 0) return;
+                            const cellText = cell.textContent.toLowerCase().replace(/\s+/g, ' ').trim();
+                            if (!cellText || cellText.includes('- - -')) return;
+                            if (cellText.includes(subjectLower) || subjectLower.includes(cellText)) {
+                                cell.classList.add('replacement-highlight');
+                            }
+                        });
+                    }
+                });
+            }
+            
+            function escapeHtml(str) {
+                return String(str).replace(/[&<>"']/g, function(m) {
+                    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+                });
             }
             
             async function loadReplacements() {
@@ -1349,130 +1171,27 @@
                     const data = parseFeed(jsonText);
                     
                     if (data.length < 2) {
-                        showNoReplacements();
+                        showNoReplacements([]);
                         return;
                     }
                     
-                    // Шукаємо рядок-заголовок у перших 5 рядках
-                    let headerRow = -1;
-                    let dateIdx = -1, groupIdx = -1, pairIdx = -1, timeIdx = -1, subjectIdx = -1, teacherIdx = -1;
-                    
-                    for (let h = 0; h < Math.min(5, data.length); h++) {
-                        const headers = data[h].map(x => String(x || '').toLowerCase().trim());
-                        const d = findColumnIndex(headers, ['дата', 'date', 'число']);
-                        const g = findColumnIndex(headers, ['група', 'group', 'гр.']);
-                        if (d !== -1 && g !== -1) {
-                            headerRow = h;
-                            dateIdx = d;
-                            groupIdx = g;
-                            pairIdx    = findColumnIndex(headers, ['пара', '№ пари', 'номер пари', 'п.№']);
-                            timeIdx    = findColumnIndex(headers, ['час', 'time', 'година']);
-                            subjectIdx = findColumnIndex(headers, ['предмет', 'дисципліна', 'освітній компонент', 'назва']);
-                            teacherIdx = findColumnIndex(headers, ['викладач', 'teacher', 'піб', 'викл']);
-                            break;
-                        }
-                    }
-                    
-                    if (headerRow === -1) {
-                        let debug = 'Не вдалося розпізнати структуру таблиці замін.<br>' +
-                                    '<small style="color:#757575;">Ось що реально є в таблиці (перші 3 рядки):<br>';
-                        for (let i = 0; i < Math.min(3, data.length); i++) {
-                            debug += 'Рядок ' + (i + 1) + ': ' +
-                                     data[i].slice(0, 10).map(x => '[' + escapeHtml(String(x)) + ']').join(' ') +
-                                     '<br>';
-                        }
-                        debug += '</small>';
-                        replacementListEl.innerHTML = '<span class="no-replacements">' + debug + '</span>';
-                        return;
-                    }
+                    const allReplacements = parseReplacementsData(data);
+                    // console.log('Parsed replacements:', allReplacements); // для дебагу
                     
                     const todayStr = todayString();
-                    const todayReplacements = [];
-                    
-                    for (let r = headerRow + 1; r < data.length; r++) {
-                        const row = data[r];
-                        if (!row || row.length === 0) continue;
-                        
-                        const rowDate = normalizeDate(row[dateIdx] || '');
-                        const rowGroup = String(row[groupIdx] || '').trim();
-                        
-                        if (rowDate !== todayStr) continue;
-                        if (!rowGroup.toLowerCase().includes(GROUP_NAME.toLowerCase())) continue;
-                        
-                        const pair = pairIdx !== -1 ? row[pairIdx] || '' : '';
-                        const time = timeIdx !== -1 ? row[timeIdx] || '' : '';
-                        const subject = subjectIdx !== -1 ? row[subjectIdx] || '' : '';
-                        const teacher = teacherIdx !== -1 ? row[teacherIdx] || '' : '';
-                        
-                        todayReplacements.push({
-                            date: rowDate,
-                            pair: String(pair).trim(),
-                            time: String(time).trim(),
-                            subject: String(subject).trim(),
-                            teacher: String(teacher).trim()
-                        });
-                    }
+                    const todayReplacements = allReplacements.filter(r => r.date === todayStr);
                     
                     if (todayReplacements.length === 0) {
-                        showNoReplacements();
+                        showNoReplacements(allReplacements);
                         return;
                     }
                     
                     renderReplacements(todayReplacements);
                     highlightSchedule(todayReplacements);
-                    
                 } catch (err) {
                     console.error('Помилка завантаження замін:', err);
                     replacementListEl.innerHTML = '<span class="no-replacements">Не вдалося завантажити дані про заміни: ' + escapeHtml(err.message) + '</span>';
                 }
-            }
-            
-            function showNoReplacements() {
-                replacementListEl.innerHTML = '<span class="no-replacements">Поточних замін немає</span>';
-            }
-            
-            function renderReplacements(replacements) {
-                let html = '';
-                replacements.forEach(r => {
-                    html += `<div class="replacement-item">`;
-                    html += `<div class="repl-date"><i class="fas fa-calendar-day"></i> ${escapeHtml(r.date)}</div>`;
-                    if (r.pair || r.time) {
-                        html += `<div class="repl-pair">${escapeHtml(r.pair)}${r.time ? ' (' + escapeHtml(r.time) + ')' : ''}</div>`;
-                    }
-                    if (r.subject) {
-                        html += `<div class="repl-subject">${escapeHtml(r.subject)}</div>`;
-                    }
-                    if (r.teacher) {
-                        html += `<div class="repl-teacher"><i class="fas fa-user"></i> ${escapeHtml(r.teacher)}</div>`;
-                    }
-                    html += `</div>`;
-                });
-                replacementListEl.innerHTML = html;
-            }
-            
-            function highlightSchedule(replacements) {
-                const scheduleCells = document.querySelectorAll('.text-schedule-table td');
-                scheduleCells.forEach(cell => {
-                    if (cell.cellIndex === 0) return;
-                    const cellText = cell.textContent.toLowerCase().replace(/\s+/g, ' ').trim();
-                    if (!cellText || cellText.includes('- - -')) return;
-                    
-                    for (const r of replacements) {
-                        if (!r.subject) continue;
-                        const subjectLower = r.subject.toLowerCase().replace(/\s+/g, ' ').trim();
-                        if (!subjectLower) continue;
-                        if (cellText.includes(subjectLower) || subjectLower.includes(cellText)) {
-                            cell.classList.add('replacement-highlight');
-                            break;
-                        }
-                    }
-                });
-            }
-            
-            function escapeHtml(str) {
-                return String(str).replace(/[&<>"']/g, function(m) {
-                    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
-                });
             }
             
             loadReplacements();
