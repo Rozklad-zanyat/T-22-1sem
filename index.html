@@ -1234,8 +1234,13 @@
             //  ПЕРЕВІРКА ЗАМІН З GOOGLE-ТАБЛИЦІ
             // ============================================================
             
-            const SHEET_JSON_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQlLOazl1JOcO5xS1-Ryan5BF2lve26w7lRG-hQTk3J48S8uwm8UtvWJmteeCyqVUtxqJVN7RHUc1I-/pub?gid=0&single=true&output=json";
-            const GROUP_NAME = "Т-22";
+// ID вашої Google-таблиці (взятий з посилання між /d/ та /edit)
+const SHEET_ID = '1QIn-Hnj49b32rjwrMaay_TRu-UQjA6YTb9Um2lzmUOk';
+
+// gid=0 — це перший аркуш таблиці. Якщо заміни на іншому аркуші — змініть 0 на потрібний gid
+const SHEET_JSON_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=0`;
+
+const GROUP_NAME = "Т-22";
             
             const replacementListEl = document.getElementById('replacement-list');
             
@@ -1262,27 +1267,27 @@
             }
             
             /**
-             * Парсить JSON-feed від Google Sheets (pub?output=json).
-             * Повертає масив масивів (рядки таблиці).
-             */
-            function parseFeed(json) {
-                const entries = json?.feed?.entry || [];
-                const rows = {};
-                entries.forEach(entry => {
-                    const cell = entry['gs$cell'];
-                    if (!cell) return;
-                    const row = parseInt(cell.row, 10);
-                    const col = parseInt(cell.col, 10);
-                    if (!rows[row]) rows[row] = [];
-                    rows[row][col - 1] = cell.$t || '';
-                });
-                const maxRow = Math.max(...Object.keys(rows).map(Number), 0);
-                const data = [];
-                for (let i = 1; i <= maxRow; i++) {
-                    if (rows[i]) data.push(rows[i]);
-                }
-                return data;
-            }
+ * Парсить відповідь Google Visualization API (gviz).
+ * Відповідь приходить у вигляді: google.visualization.Query.setResponse({...});
+ */
+function parseFeed(jsonText) {
+    const start = jsonText.indexOf('{');
+    const end = jsonText.lastIndexOf('}');
+    if (start === -1 || end === -1) return [];
+    const data = JSON.parse(jsonText.substring(start, end + 1));
+    if (!data.table) return [];
+    const headers = data.table.cols.map(c => (c && c.label) ? c.label : '');
+    const rows = data.table.rows.map(r =>
+        (r.c || []).map(cell => {
+            if (!cell) return '';
+            // f — відформатоване значення (напр., дата як "25.11.2026"), v — сире
+            if (cell.f != null) return cell.f;
+            if (cell.v != null) return cell.v;
+            return '';
+        })
+    );
+    return [headers, ...rows];
+}
             
             /**
              * Знаходить індекс колонки за ключовими словами.
@@ -1302,8 +1307,8 @@
                 try {
                     const response = await fetch(SHEET_JSON_URL);
                     if (!response.ok) throw new Error('Network response was not ok');
-                    const json = await response.json();
-                    const data = parseFeed(json);
+                    const jsonText = await response.text();
+                    const data = parseFeed(jsonText);
                     
                     if (data.length < 2) {
                         showNoReplacements();
