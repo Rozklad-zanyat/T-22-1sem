@@ -280,6 +280,7 @@
         
         #replacement-list { font-size: 0.9rem; color: var(--text-medium); line-height: 1.6; }
         
+        /* Заміни: рядкове розташування */
         .replacement-item {
             background: var(--danger-bg);
             border-left: 4px solid var(--danger);
@@ -287,9 +288,20 @@
             padding: 8px 12px;
             margin-bottom: 8px;
             color: var(--text-dark);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 16px;
+            align-items: center;
+            font-size: 0.9rem;
         }
         
         .replacement-item:last-child { margin-bottom: 0; }
+        
+        .replacement-item > div {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
         
         .replacement-item .repl-date {
             font-weight: 700;
@@ -350,6 +362,8 @@
             .weeks-table { font-size: 0.9rem; }
             .weeks-table th, .weeks-table td { padding: 6px 8px; }
             .edu-process-grid { grid-template-columns: 1fr; }
+            .replacement-item { font-size: 0.85rem; gap: 4px 12px; }
+            .replacement-item .repl-date { font-size: 0.8rem; }
         }
         
         @media (max-width: 360px) {
@@ -515,7 +529,7 @@
         <div id="replacement-section">
             <div class="note-title">
                 <i class="fas fa-exclamation-circle" style="color: #FF0000;"></i>
-                <span>Увага! Заміни на сьогодні</span>
+                <span>Увага! Заміни занять</span>
             </div>
             <div id="replacement-list">
                 <span class="loading-replacements">Перевірка замін…</span>
@@ -944,7 +958,7 @@
             
             // ============================================================
             //  ПЕРЕВІРКА ЗАМІН З GOOGLE-ТАБЛИЦІ
-            //  Таблиця має блокову структуру:
+            //  Блокова структура:
             //    [Дата] [26.11.2026] [четвер] [Тиждень НАД рискою]
             //    [Група] [ (порожньо = Пара) ] [Освітній компонент] [Аудит] [Викладач]
             //    [Т-22] [1] [Вища математика] [301] [Петренко]
@@ -966,9 +980,20 @@
                 return `${String(day).padStart(2, '0')}.${String(month).padStart(2, '0')}.${year}`;
             }
             
-            function todayString() {
-                const d = new Date();
-                return `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}.${d.getFullYear()}`;
+            /**
+             * Повертає індекс колонки розкладу (1=Пн, 2=Вт, 3=Ср, 4=Чт, 5=Пт)
+             * для вказаної дати у форматі dd.mm.yyyy. Або -1, якщо дата на вихідний.
+             */
+            function getDayColumnFromDate(dateStr) {
+                if (!dateStr) return -1;
+                const parts = String(dateStr).match(/(\d{1,2})[./-](\d{1,2})[./-](\d{2,4})/);
+                if (!parts) return -1;
+                const day = parseInt(parts[1], 10);
+                const month = parseInt(parts[2], 10);
+                let year = parseInt(parts[3], 10);
+                if (year < 100) year += 2000;
+                const dow = new Date(year, month - 1, day).getDay(); // 0=Нд, 1=Пн...
+                return (dow >= 1 && dow <= 5) ? dow : -1;
             }
             
             function parseFeed(jsonText) {
@@ -997,7 +1022,6 @@
             
             /**
              * Розбирає блокову структуру таблиці замін.
-             * Повертає масив об'єктів {date, group, pair, time, subject, audit, teacher}.
              */
             function parseReplacementsData(data) {
                 const result = [];
@@ -1010,7 +1034,7 @@
                     const row = data[r] || [];
                     const first = String(row[0] || '').trim().toLowerCase();
                     
-                    // Рядок-заголовок блоку: "Дата | 26.11.2026 | четвер | Тиждень ..."
+                    // Блок «Дата ...»
                     if (first === 'дата' || first.startsWith('дата')) {
                         let dateStr = String(row[1] || '').trim();
                         if (!/\d/.test(dateStr)) dateStr = String(row[0] || '').trim();
@@ -1021,7 +1045,7 @@
                         continue;
                     }
                     
-                    // Рядок з назвами колонок: "Група | (порожньо) | Освітній компонент | Аудит | Викладач"
+                    // Блок «Група | ... | Освітній компонент | ...»
                     if (first.includes('група') && headerRow === -1) {
                         colMap = {};
                         for (let c = 0; c < row.length; c++) {
@@ -1034,7 +1058,6 @@
                             else if (h.includes('пара') || h === '№' || h === '№ п.' || h.includes('номер')) colMap.pair = c;
                             else if (h.includes('час') || h.includes('годин')) colMap.time = c;
                         }
-                        // Якщо «Пара» не знайдена, але є порожня колонка між «Група» та «Освітній компонент» — вважаємо її «Парою»
                         if (colMap.pair === undefined && colMap.group !== undefined && colMap.subject !== undefined) {
                             if (colMap.subject - colMap.group === 2) {
                                 colMap.pair = colMap.group + 1;
@@ -1048,7 +1071,7 @@
                     if (headerRow !== -1 && currentDate && colMap.group !== undefined) {
                         let group = String(row[colMap.group] || '').trim();
                         if (group) lastGroup = group;
-                        else group = lastGroup; // об'єднані клітинки
+                        else group = lastGroup;
                         
                         if (!group) continue;
                         if (!group.toLowerCase().includes(GROUP_NAME.toLowerCase())) continue;
@@ -1070,79 +1093,66 @@
                 return result;
             }
             
-            function getDayColumn() {
-                const day = new Date().getDay(); // 0=Нд, 1=Пн, ..., 6=Сб
-                if (day >= 1 && day <= 5) return day; // Пн=1, Вт=2, Ср=3, Чт=4, Пт=5
-                return -1;
-            }
-            
+            /**
+             * Відображення замін у рядок.
+             */
             function renderReplacements(replacements) {
                 let html = '';
                 replacements.forEach(r => {
-                    html += `<div class="replacement-item">`;
-                    html += `<div class="repl-date"><i class="fas fa-calendar-day"></i> ${escapeHtml(r.date)}</div>`;
-                    if (r.pair || r.time) {
-                        html += `<div class="repl-pair">`;
-                        if (r.pair) html += `${escapeHtml(r.pair)} пара`;
-                        if (r.time) html += `${r.pair ? ' (' : ''}${escapeHtml(r.time)}${r.pair ? ')' : ''}`;
-                        html += `</div>`;
+                    const parts = [];
+                    if (r.date) {
+                        parts.push(`<div class="repl-date"><i class="fas fa-calendar-day"></i> ${escapeHtml(r.date)}</div>`);
                     }
-                    if (r.subject) html += `<div class="repl-subject">${escapeHtml(r.subject)}</div>`;
-                    if (r.audit) html += `<div class="repl-teacher"><i class="fas fa-door-open"></i> Ауд. ${escapeHtml(r.audit)}</div>`;
-                    if (r.teacher) html += `<div class="repl-teacher"><i class="fas fa-user"></i> ${escapeHtml(r.teacher)}</div>`;
-                    html += `</div>`;
+                    if (r.pair || r.time) {
+                        let pairText = '';
+                        if (r.pair) pairText += `${escapeHtml(r.pair)} пара`;
+                        if (r.time) pairText += `${r.pair ? ' (' : ''}${escapeHtml(r.time)}${r.pair ? ')' : ''}`;
+                        parts.push(`<div class="repl-pair">${pairText}</div>`);
+                    }
+                    if (r.subject) {
+                        parts.push(`<div class="repl-subject">${escapeHtml(r.subject)}</div>`);
+                    }
+                    if (r.audit) {
+                        parts.push(`<div class="repl-teacher"><i class="fas fa-door-open"></i> ${escapeHtml(r.audit)}</div>`);
+                    }
+                    if (r.teacher) {
+                        parts.push(`<div class="repl-teacher"><i class="fas fa-user"></i> ${escapeHtml(r.teacher)}</div>`);
+                    }
+                    
+                    if (parts.length > 0) {
+                        html += `<div class="replacement-item">${parts.join('')}</div>`;
+                    }
                 });
                 replacementListEl.innerHTML = html;
             }
             
-            function showNoReplacements(allReplacements) {
-                let html = '<span class="no-replacements">Поточних замін немає</span>';
-                
-                if (allReplacements && allReplacements.length > 0) {
-                    const now = new Date();
-                    now.setHours(0, 0, 0, 0);
-                    const upcoming = allReplacements
-                        .filter(r => {
-                            const [d, m, y] = r.date.split('.').map(Number);
-                            const rDate = new Date(y, m - 1, d);
-                            return rDate > now;
-                        })
-                        .sort((a, b) => {
-                            const da = a.date.split('.').map(Number);
-                            const db = b.date.split('.').map(Number);
-                            return new Date(da[2], da[1] - 1, da[0]) - new Date(db[2], db[1] - 1, db[0]);
-                        });
-                    if (upcoming.length > 0) {
-                        const nextDate = upcoming[0].date;
-                        const count = upcoming.filter(x => x.date === nextDate).length;
-                        html += `<div style="margin-top:10px;padding:8px 12px;background:#fff8e1;border-left:4px solid #ff9800;border-radius:6px;font-size:0.85rem;color:#424242;">
-                            <i class="fas fa-info-circle" style="color:#ff9800;"></i>
-                            Найближчі заміни: <strong>${escapeHtml(nextDate)}</strong> (${count} ${count === 1 ? 'заміна' : 'замін'})
-                        </div>`;
-                    }
-                }
-                replacementListEl.innerHTML = html;
+            function showNoReplacements() {
+                replacementListEl.innerHTML = '<span class="no-replacements">Заміни відсутні</span>';
             }
             
+            /**
+             * Підсвічує клітинки розкладу, що відповідають замінам
+             * (за днем тижня з дати + номером пари).
+             */
             function highlightSchedule(replacements) {
-                const dayCol = getDayColumn();
                 const scheduleRows = document.querySelectorAll('.text-schedule-table tbody tr');
                 
                 replacements.forEach(r => {
-                    // Спроба 1: точне підсвічування за номером пари та днем тижня
+                    const dayCol = getDayColumnFromDate(r.date);
+                    if (dayCol === -1) return;
+                    
                     const pairMatch = String(r.pair || '').match(/\d+/);
-                    if (pairMatch && dayCol !== -1) {
+                    if (pairMatch) {
                         const pairNum = parseInt(pairMatch[0], 10);
                         if (pairNum >= 1 && pairNum <= scheduleRows.length) {
                             const cell = scheduleRows[pairNum - 1].cells[dayCol];
-                            if (cell && !cell.textContent.includes('- - -')) {
+                            if (cell && !cell.textContent.trim().includes('- - -')) {
                                 cell.classList.add('replacement-highlight');
                                 return;
                             }
                         }
                     }
                     
-                    // Спроба 2: пошук за назвою предмета
                     if (r.subject) {
                         const subjectLower = r.subject.toLowerCase().replace(/\s+/g, ' ').trim();
                         document.querySelectorAll('.text-schedule-table td').forEach(cell => {
@@ -1171,23 +1181,28 @@
                     const data = parseFeed(jsonText);
                     
                     if (data.length < 2) {
-                        showNoReplacements([]);
+                        showNoReplacements();
                         return;
                     }
                     
                     const allReplacements = parseReplacementsData(data);
-                    // console.log('Parsed replacements:', allReplacements); // для дебагу
                     
-                    const todayStr = todayString();
-                    const todayReplacements = allReplacements.filter(r => r.date === todayStr);
+                    // Сортуємо за датою, а потім за номером пари
+                    allReplacements.sort((a, b) => {
+                        const da = a.date.split('.').map(Number);
+                        const db = b.date.split('.').map(Number);
+                        const dateDiff = new Date(da[2], da[1] - 1, da[0]) - new Date(db[2], db[1] - 1, db[0]);
+                        if (dateDiff !== 0) return dateDiff;
+                        return (parseInt(a.pair, 10) || 0) - (parseInt(b.pair, 10) || 0);
+                    });
                     
-                    if (todayReplacements.length === 0) {
-                        showNoReplacements(allReplacements);
+                    if (allReplacements.length === 0) {
+                        showNoReplacements();
                         return;
                     }
                     
-                    renderReplacements(todayReplacements);
-                    highlightSchedule(todayReplacements);
+                    renderReplacements(allReplacements);
+                    highlightSchedule(allReplacements);
                 } catch (err) {
                     console.error('Помилка завантаження замін:', err);
                     replacementListEl.innerHTML = '<span class="no-replacements">Не вдалося завантажити дані про заміни: ' + escapeHtml(err.message) + '</span>';
