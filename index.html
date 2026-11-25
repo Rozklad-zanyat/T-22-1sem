@@ -21,6 +21,8 @@
             --border-medium: #bdbdbd;
             --shadow-light: rgba(0, 0, 0, 0.08);
             --shadow-medium: rgba(0, 0, 0, 0.12);
+            --danger: #c62828;
+            --danger-bg: #ffebee;
         }
         
         * {
@@ -45,7 +47,6 @@
             margin: 0 auto;
         }
         
-        /* Заголовок */
         header {
             background: linear-gradient(145deg, #ffffff, var(--pale-green));
             padding: 10px 8px;
@@ -72,7 +73,6 @@
             font-weight: 500;
         }
         
-        /* Секції */
         .section {
             background-color: var(--bg-card);
             border-radius: 16px;
@@ -94,7 +94,7 @@
             font-weight: 600;
         }
         
-        /* Таблиця курсів - мобільна адаптація */
+        /* Таблиця курсів */
         .courses-container {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
@@ -131,7 +131,6 @@
             color: var(--text-medium);
         }
         
-        /* Рівномірний розподіл ширини стовпців 2-4 */
         .courses-table th:nth-child(2),
         .courses-table td:nth-child(2),
         .courses-table th:nth-child(3),
@@ -218,51 +217,26 @@
             width: 100%;
         }
         
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 9998;
-        }
-
-        .overlay.active {
-            display: block;
-        }
-
-        .close-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--primary-green);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            z-index: 10000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .close-btn.active {
-            display: flex;
+        /* Зменшені кнопки в блоці замін */
+        .btn-sm {
+            padding: 6px 10px;
+            font-size: 0.8rem;
+            border-radius: 8px;
+            gap: 6px;
         }
         
-        /* Графіка освітнього процесу (у 2 стовпчики) */
+        .btn-sm.btn-link {
+            margin-top: 4px;
+        }
+        
+        /* Графіка освітнього процесу */
         .edu-process-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
             margin-top: 6px;
         }
-
+        
         .edu-column {
             background: white;
             border: 1px solid var(--border-light);
@@ -270,7 +244,7 @@
             overflow: hidden;
             box-shadow: 0 3px 10px var(--shadow-light);
         }
-
+        
         .edu-column-header {
             background-color: var(--primary-green);
             color: white;
@@ -279,11 +253,11 @@
             text-align: center;
             font-size: 0.95rem;
         }
-
+        
         .edu-column-content {
             padding: 8px 12px;
         }
-
+        
         .edu-item {
             padding: 6px 0;
             border-bottom: 1px solid var(--border-light);
@@ -293,29 +267,29 @@
             justify-content: space-between;
             align-items: center;
         }
-
+        
         .edu-item:last-child {
             border-bottom: none;
         }
-
+        
         .edu-item-label {
             font-weight: 500;
             color: var(--text-dark);
         }
-
+        
         .edu-item-date {
             font-weight: 600;
             color: var(--primary-green);
             white-space: nowrap;
         }
-
+        
         .edu-process-note {
             font-size: 0.78rem;
             color: var(--text-light);
             font-style: italic;
             display: block;
         }
-
+        
         .edu-badge-vacation {
             background-color: var(--pale-green);
             color: var(--primary-green);
@@ -325,7 +299,7 @@
             font-size: 0.85rem;
             border: 1px solid var(--light-green);
         }
-
+        
         /* Таблиця тижнів */
         .weeks-table {
             width: 100%;
@@ -397,6 +371,101 @@
             color: var(--primary-green);
         }
         
+        /* Блок замін */
+        #replacement-section {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-left: 5px solid var(--primary-green);
+            border-radius: 14px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 12px var(--shadow-light);
+        }
+        
+        #replacement-section .note-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        
+        #replacement-list {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+        
+        .replacement-item {
+            background: var(--danger-bg);
+            border-left: 4px solid var(--danger);
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+        
+        .replacement-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .replacement-item .repl-date {
+            font-weight: 700;
+            color: var(--danger);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        
+        .replacement-item .repl-pair {
+            font-weight: 700;
+            color: var(--primary-green);
+        }
+        
+        .replacement-item .repl-subject {
+            font-weight: 600;
+        }
+        
+        .replacement-item .repl-teacher {
+            color: var(--text-medium);
+            font-size: 0.85rem;
+        }
+        
+        .no-replacements {
+            color: var(--text-medium);
+            font-style: italic;
+            padding: 6px 0;
+        }
+        
+        .loading-replacements {
+            color: var(--text-light);
+            font-style: italic;
+        }
+        
+        /* Підсвічування клітинок розкладу із заміною */
+        .text-schedule-table td.replacement-highlight {
+            background-color: #ffcdd2 !important;
+            border: 2px solid #e53935 !important;
+            position: relative;
+        }
+        
+        .text-schedule-table td.replacement-highlight::after {
+            content: "заміна";
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: #e53935;
+            color: #fff;
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 1px 4px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        
         /* Футер */
         footer {
             text-align: center;
@@ -444,8 +513,13 @@
             }
             
             .btn {
-                padding: 6px 12px;
+                padding: 8px 12px;
                 font-size: 0.9rem;
+            }
+            
+            .btn-sm {
+                padding: 5px 8px;
+                font-size: 0.75rem;
             }
             
             .weeks-table {
@@ -456,9 +530,9 @@
             .weeks-table td {
                 padding: 6px 8px;
             }
-
+            
             .edu-process-grid {
-                grid-template-columns: 1fr; /* На вузьких екранах в один стовпчик для зручності */
+                grid-template-columns: 1fr;
             }
         }
         
@@ -486,7 +560,6 @@
             animation: fadeIn 0.4s ease-out;
         }
         
-        /* Спеціальні класи для мобільного UX */
         .touch-friendly {
             padding: 6px;
             min-height: 42px;
@@ -501,21 +574,6 @@
             display: none;
         }
         
-        .loading {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            border: 3px solid var(--pale-green);
-            border-top-color: var(--primary-green);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Додаткові стилі для кращої читабельності */
         .teacher-name {
             font-size: 0.86rem;
             color: var(--text-light);
@@ -527,24 +585,13 @@
             color: var(--text-dark);
         }
         
-        .scroll-hint {
-            text-align: center;
-            color: var(--primary-green);
-            font-size: 0.9rem;
-            margin: 8px 0;
-            padding: 8px;
-            background: var(--pale-green);
-            border-radius: 10px;
-            border: 1px solid var(--border-light);
-        }
-        
         .current-week {
             box-shadow: 0 0 0 3px var(--light-green) !important;
             background-color: #f1f8e9 !important;
             font-weight: bold !important;
         }
         
-        /* Стилі для нової таблиці розкладу */
+        /* Таблиця розкладу */
         .text-schedule-container {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
@@ -634,13 +681,101 @@
             <p class="subtitle">1 семестр 2026-2027</p>
         </header>
         
+        <!-- 1. Розклад занять (переміщено на початок) -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-table"></i> Розклад занять у 1 семестрі</h2>
+            
+            <div class="text-schedule-container no-scrollbar">
+                <table class="text-schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Пара</th>
+                            <th>Понеділок</th>
+                            <th>Вівторок</th>
+                            <th>Середа</th>
+                            <th>Четвер</th>
+                            <th>П'ятниця</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1</strong><br><div class="teacher-name">8:30-9:50</div></td>
+                            <td>Менеджмент</td>
+                            <td>Основи маркетингу</td>
+                            <td class="empty-slot">- - -</td>
+                            <td><span class="schedule-week-nad">над рис.</span> Вступ до фаху та ФГ /<br>
+                                <span class="schedule-week-pid">під рис.</span> Логістика</td>
+                            <td>Вступ до фаху та ФГ</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2</strong><br><div class="teacher-name">10:00-11:20</div></td>
+                            <td>Економіка підприємства</td>
+                            <td>Фізична культура</td>
+                            <td class="empty-slot">- - -</td>
+                            <td>Комерційне товарознавство</td>
+                            <td>Іноземна мова (за професійним спрямуванням)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3</strong><br><div class="teacher-name">12:00-13:20</div></td>
+                            <td>Соціологія</td>
+                            <td class="empty-slot">- - -</td>
+                            <td>Логістика</td>
+                            <td>Підприємництво та культура бізнесу</td>
+                            <td>Інформатика та КТ</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4</strong><br><div class="teacher-name">13:30-14:50</div></td>
+                            <td><span class="schedule-week-nad">над рис.</span> Менеджмент /<br>
+                                <span class="schedule-week-pid">під рис.</span> Підприємництво та культура бізнесу</td>
+                            <td class="empty-slot">- - -</td>
+                            <td>Економіка підприємства</td>
+                            <td><span class="schedule-week-nad">над рис.</span> Інформатика та КТ /<br>
+                                <span class="schedule-week-pid">під рис.</span> <span class="empty-slot">- - -</span></td>
+                            <td>Фінанси, гроші та кредит</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5</strong><br><div class="teacher-name">15:00-16:20</div></td>
+                            <td class="empty-slot">- - -</td>
+                            <td class="empty-slot">- - -</td>
+                            <td><span class="schedule-week-nad">над рис.</span> <span class="empty-slot">- - -</span> /<br>
+                                <span class="schedule-week-pid">під рис.</span> Фінанси, гроші та кредит</td>
+                            <td class="empty-slot">- - -</td>
+                            <td class="empty-slot">- - -</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <p style="text-align: center; color: var(--text-light); margin-top: 12px; font-size: 0.9rem;">
+                <i class="fas fa-info-circle"></i> <span class="schedule-week-nad">над рис.</span> – заняття проводяться у тижні над рискою<br>
+                <i class="fas fa-info-circle"></i> <span class="schedule-week-pid">під рис.</span> – заняття проводяться у тижні під рискою
+            </p>
+        </section>
+        
+        <!-- 2. Блок перевірки замін (перебудований) -->
+        <div id="replacement-section">
+            <div class="note-title">
+                <i class="fas fa-exclamation-circle" style="color: #FF0000;"></i>
+                <span>Увага! Заміни на сьогодні</span>
+            </div>
+            <div id="replacement-list">
+                <span class="loading-replacements">Перевірка замін…</span>
+            </div>
+            <div class="btn-container" style="margin-top: 10px;">
+                <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQlLOazl1JOcO5xS1-Ryan5BF2lve26w7lRG-hQTk3J48S8uwm8UtvWJmteeCyqVUtxqJVN7RHUc1I-/pubhtml?gid=0&single=true" class="btn btn-link btn-sm touch-friendly btn-full" target="_blank">
+                    <i class="fas fa-exchange-alt"></i> Заміни занять
+                </a>
+                <a href="https://gkt.kname.edu.ua/" class="btn btn-link btn-sm touch-friendly btn-full" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> Сайт коледжу
+                </a>
+            </div>
+        </div>
+        
+        <!-- 3. Курси ClassRoom та відео зустрічі -->
         <section class="section">
             <h2 class="section-title"><i class="fas fa-book"></i> Курси ClassRoom та відео зустрічі</h2>
             
-            <div class="scroll-hint">
-                <i class="fas fa-arrow-left"></i> Гортай вліво для перегляду всіх колонок <i class="fas fa-arrow-right"></i>
-            </div>
-            
+            <!-- Підказку про гортання прибрано, скрол залишено -->
             <div class="courses-container no-scrollbar">
                 <table class="courses-table">
                     <thead>
@@ -847,7 +982,7 @@
                                 &nbsp;
                             </td>
                         </tr>
-
+                        
                         <!-- Рядок 9 -->
                         <tr class="course-row">
                             <td>9</td>
@@ -872,7 +1007,7 @@
                                 &nbsp;
                             </td>
                         </tr>
-
+                        
                         <!-- Рядок 10 -->
                         <tr class="course-row">
                             <td>10</td>
@@ -922,7 +1057,7 @@
                                 &nbsp;
                             </td>
                         </tr>
-
+                        
                         <!-- Рядок 12 -->
                         <tr class="course-row">
                             <td>12</td>
@@ -951,91 +1086,53 @@
                 </table>
             </div>
         </section>
-
-        <div class="note">
-            <p><i class="fas fa-exclamation-circle" style="color: #FF0000;"></i> <strong style="color: #FF0000;">Увага!</strong> Не забувайте про можливі перенесення та заміни занять.</p>
-            
-            <div class="btn-container" style="margin-top: 8px;">
-                <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQlLOazl1JOcO5xS1-Ryan5BF2lve26w7lRG-hQTk3J48S8uwm8UtvWJmteeCyqVUtxqJVN7RHUc1I-/pubhtml?gid=0&single=true" class="btn btn-link touch-friendly btn-full" target="_blank">
-                    <i class="fas fa-exchange-alt"></i> Заміни занять
-                </a>
-                <a href="https://gkt.kname.edu.ua/" class="btn btn-link touch-friendly btn-full" target="_blank">
-                    <i class="fas fa-external-link-alt"></i> Сайт коледжу
-                </a>
-            </div>
-        </div>
         
-        <!-- Нова секція з текстовим розкладом -->
+        <!-- 4. Графік освітнього процесу -->
         <section class="section">
-            <h2 class="section-title"><i class="fas fa-table"></i> Розклад занять у 1 семестрі</h2>
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Графік освітнього процесу</h2>
             
-            <div class="text-schedule-container no-scrollbar">
-                <table class="text-schedule-table">
-                    <thead>
-                        <tr>
-                            <th>Пара</th>
-                            <th>Понеділок</th>
-                            <th>Вівторок</th>
-                            <th>Середа</th>
-                            <th>Четвер</th>
-                            <th>П'ятниця</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>1</strong><br><div class="teacher-name">8:30-9:50</div></td>
-                            <td>Менеджмент</td>
-                            <td>Основи маркетингу</td>
-                            <td class="empty-slot">- - -</td>
-                            <td><span class="schedule-week-nad">над рис.</span> Вступ до фаху та ФГ /<br>
-                                <span class="schedule-week-pid">під рис.</span> Логістика</td>
-                            <td>Вступ до фаху та ФГ</td>
-                        </tr>
-                        <tr>
-                            <td><strong>2</strong><br><div class="teacher-name">10:00-11:20</div></td>
-                            <td>Економіка підприємства</td>
-                            <td>Фізична культура</td>
-                            <td class="empty-slot">- - -</td>
-                            <td>Комерційне товарознавство</td>
-                            <td>Іноземна мова (за професійним спрямуванням)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>3</strong><br><div class="teacher-name">12:00-13:20</div></td>
-                            <td>Соціологія</td>
-                            <td class="empty-slot">- - -</td>
-                            <td>Логістика</td>
-                            <td>Підприємництво та культура бізнесу</td>
-                            <td>Інформатика та КТ</td>
-                        </tr>
-                        <tr>
-                            <td><strong>4</strong><br><div class="teacher-name">13:30-14:50</div></td>
-                            <td><span class="schedule-week-nad">над рис.</span> Менеджмент /<br>
-                                <span class="schedule-week-pid">під рис.</span> Підприємництво та культура бізнесу</td>
-                            <td class="empty-slot">- - -</td>
-                            <td>Економіка підприємства</td>
-                            <td><span class="schedule-week-nad">над рис.</span> Інформатика та КТ /<br>
-                                <span class="schedule-week-pid">під рис.</span> <span class="empty-slot">- - -</span></td>
-                            <td>Фінанси, гроші та кредит</td>
-                        </tr>
-                        <tr>
-                            <td><strong>5</strong><br><div class="teacher-name">15:00-16:20</div></td>
-                            <td class="empty-slot">- - -</td>
-                            <td class="empty-slot">- - -</td>
-                            <td><span class="schedule-week-nad">над рис.</span> <span class="empty-slot">- - -</span> /<br>
-                                <span class="schedule-week-pid">під рис.</span> Фінанси, гроші та кредит</td>
-                            <td class="empty-slot">- - -</td>
-                            <td class="empty-slot">- - -</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="edu-process-grid">
+                <div class="edu-column">
+                    <div class="edu-column-header"><i class="fas fa-bookmark"></i> 1 семестр</div>
+                    <div class="edu-column-content">
+                        <div class="edu-item">
+                            <div>
+                                <span class="edu-item-label"><i class="fas fa-chalkboard" style="color: var(--primary-green);"></i> Заняття</span>
+                                <span class="edu-process-note">останній тиждень заліковий</span>
+                            </div>
+                            <span class="edu-item-date">01.09 – 28.12</span>
+                        </div>
+                        <div class="edu-item">
+                            <span class="edu-item-label"><i class="fas fa-umbrella-beach" style="color: var(--light-green);"></i> Канікули</span>
+                            <span class="edu-badge-vacation">29.12 – 10.01</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="edu-column">
+                    <div class="edu-column-header"><i class="fas fa-bookmark"></i> 2 семестр</div>
+                    <div class="edu-column-content">
+                        <div class="edu-item">
+                            <div>
+                                <span class="edu-item-label"><i class="fas fa-chalkboard" style="color: var(--primary-green);"></i> Заняття</span>
+                                <span class="edu-process-note">останній тиждень заліковий</span>
+                            </div>
+                            <span class="edu-item-date">11.01 – 29.05</span>
+                        </div>
+                        <div class="edu-item">
+                            <span class="edu-item-label"><i class="fas fa-briefcase" style="color: var(--primary-green);"></i> Практика</span>
+                            <span class="edu-item-date">31.05 – 30.06</span>
+                        </div>
+                        <div class="edu-item">
+                            <span class="edu-item-label"><i class="fas fa-sun" style="color: var(--light-green);"></i> Канікули</span>
+                            <span class="edu-badge-vacation">01.07 – 31.08</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <p style="text-align: center; color: var(--text-light); margin-top: 12px; font-size: 0.9rem;">
-                <i class="fas fa-info-circle"></i> <span class="schedule-week-nad">над рис.</span> – заняття проводяться у тижні над рискою<br>
-                <i class="fas fa-info-circle"></i> <span class="schedule-week-pid">під рис.</span> – заняття проводяться у тижні під рискою
-            </p>
         </section>
         
+        <!-- 5. Розподіл тижнів -->
         <section class="section">
             <h2 class="section-title"><i class="fas fa-calendar-week"></i> Розподіл тижнів</h2>
             
@@ -1086,53 +1183,6 @@
                 </tbody>
             </table>
         </section>
-
-        <!-- Секція: Графік освітнього процесу (2 стовпчики, під розподілом тижнів) -->
-        <section class="section">
-            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Графік освітнього процесу</h2>
-            
-            <div class="edu-process-grid">
-                <!-- 1 семестр -->
-                <div class="edu-column">
-                    <div class="edu-column-header"><i class="fas fa-bookmark"></i> 1 семестр</div>
-                    <div class="edu-column-content">
-                        <div class="edu-item">
-                            <div>
-                                <span class="edu-item-label"><i class="fas fa-chalkboard" style="color: var(--primary-green);"></i> Заняття</span>
-                                <span class="edu-process-note">останній тиждень заліковий</span>
-                            </div>
-                            <span class="edu-item-date">01.09 – 28.12</span>
-                        </div>
-                        <div class="edu-item">
-                            <span class="edu-item-label"><i class="fas fa-umbrella-beach" style="color: var(--light-green);"></i> Канікули</span>
-                            <span class="edu-badge-vacation">29.12 – 10.01</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2 семестр -->
-                <div class="edu-column">
-                    <div class="edu-column-header"><i class="fas fa-bookmark"></i> 2 семестр</div>
-                    <div class="edu-column-content">
-                        <div class="edu-item">
-                            <div>
-                                <span class="edu-item-label"><i class="fas fa-chalkboard" style="color: var(--primary-green);"></i> Заняття</span>
-                                <span class="edu-process-note">останній тиждень заліковий</span>
-                            </div>
-                            <span class="edu-item-date">11.01 – 29.05</span>
-                        </div>
-                        <div class="edu-item">
-                            <span class="edu-item-label"><i class="fas fa-briefcase" style="color: var(--primary-green);"></i> Практика</span>
-                            <span class="edu-item-date">31.05 – 30.06</span>
-                        </div>
-                        <div class="edu-item">
-                            <span class="edu-item-label"><i class="fas fa-sun" style="color: var(--light-green);"></i> Канікули</span>
-                            <span class="edu-badge-vacation">01.07 – 31.08</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
         
         <footer>
             <p>Група Т-22 / 1 семестр 2026-2027</p>
@@ -1141,10 +1191,10 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Виділення поточного тижня
+            // --- Виділення поточного тижня (без змін) ---
             const today = new Date();
             const weekCells = document.querySelectorAll('.weeks-table td');
-
+            
             weekCells.forEach(cell => {
                 const cellText = cell.textContent.trim();
                 const dateRange = cellText.split(' - ');
@@ -1169,8 +1219,8 @@
                     }
                 }
             });
-                  
-            // Плавна прокрутка до секцій
+            
+            // --- Плавна прокрутка до секцій (без змін) ---
             const sectionTitles = document.querySelectorAll('.section-title');
             sectionTitles.forEach(title => {
                 title.style.cursor = 'pointer';
@@ -1179,6 +1229,195 @@
                     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 });
             });
+            
+            // ============================================================
+            //  ПЕРЕВІРКА ЗАМІН З GOOGLE-ТАБЛИЦІ
+            // ============================================================
+            
+            const SHEET_JSON_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQlLOazl1JOcO5xS1-Ryan5BF2lve26w7lRG-hQTk3J48S8uwm8UtvWJmteeCyqVUtxqJVN7RHUc1I-/pub?gid=0&single=true&output=json";
+            const GROUP_NAME = "Т-22";
+            
+            const replacementListEl = document.getElementById('replacement-list');
+            
+            /**
+             * Нормалізує дату до формату dd.mm.yyyy.
+             * Підтримує dd.mm.yyyy, dd.mm.yy, dd/mm/yyyy, dd-mm-yyyy.
+             */
+            function normalizeDate(str) {
+                if (!str) return '';
+                str = String(str).trim();
+                // Витягуємо числа
+                const parts = str.match(/(\d{1,4})[./-](\d{1,2})[./-](\d{1,4})/);
+                if (!parts) return str;
+                let day = parseInt(parts[1], 10);
+                let month = parseInt(parts[2], 10);
+                let year = parseInt(parts[3], 10);
+                if (year < 100) year += 2000;
+                return `${String(day).padStart(2, '0')}.${String(month).padStart(2, '0')}.${year}`;
+            }
+            
+            function todayString() {
+                const d = new Date();
+                return `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}.${d.getFullYear()}`;
+            }
+            
+            /**
+             * Парсить JSON-feed від Google Sheets (pub?output=json).
+             * Повертає масив масивів (рядки таблиці).
+             */
+            function parseFeed(json) {
+                const entries = json?.feed?.entry || [];
+                const rows = {};
+                entries.forEach(entry => {
+                    const cell = entry['gs$cell'];
+                    if (!cell) return;
+                    const row = parseInt(cell.row, 10);
+                    const col = parseInt(cell.col, 10);
+                    if (!rows[row]) rows[row] = [];
+                    rows[row][col - 1] = cell.$t || '';
+                });
+                const maxRow = Math.max(...Object.keys(rows).map(Number), 0);
+                const data = [];
+                for (let i = 1; i <= maxRow; i++) {
+                    if (rows[i]) data.push(rows[i]);
+                }
+                return data;
+            }
+            
+            /**
+             * Знаходить індекс колонки за ключовими словами.
+             */
+            function findColumnIndex(headers, keywords) {
+                for (let i = 0; i < headers.length; i++) {
+                    const h = String(headers[i] || '').toLowerCase();
+                    if (keywords.some(k => h.includes(k))) return i;
+                }
+                return -1;
+            }
+            
+            /**
+             * Завантажує та обробляє заміни.
+             */
+            async function loadReplacements() {
+                try {
+                    const response = await fetch(SHEET_JSON_URL);
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    const json = await response.json();
+                    const data = parseFeed(json);
+                    
+                    if (data.length < 2) {
+                        showNoReplacements();
+                        return;
+                    }
+                    
+                    const headers = data[0].map(h => String(h || '').trim());
+                    const dateIdx = findColumnIndex(headers, ['дата']);
+                    const groupIdx = findColumnIndex(headers, ['група', 'group']);
+                    const pairIdx = findColumnIndex(headers, ['пара', '№ пари', 'номер пари']);
+                    const timeIdx = findColumnIndex(headers, ['час', 'time']);
+                    const subjectIdx = findColumnIndex(headers, ['предмет', 'дисципліна', 'освітній компонент']);
+                    const teacherIdx = findColumnIndex(headers, ['викладач', 'teacher', 'піб']);
+                    
+                    if (dateIdx === -1 || groupIdx === -1) {
+                        // Якщо не вдалося визначити колонки — показуємо повідомлення
+                        replacementListEl.innerHTML = '<span class="no-replacements">Не вдалося розпізнати структуру таблиці замін.</span>';
+                        return;
+                    }
+                    
+                    const todayStr = todayString();
+                    const todayReplacements = [];
+                    
+                    for (let r = 1; r < data.length; r++) {
+                        const row = data[r];
+                        const rowDate = normalizeDate(row[dateIdx] || '');
+                        const rowGroup = String(row[groupIdx] || '').trim();
+                        
+                        if (rowDate !== todayStr) continue;
+                        // Перевірка групи (без урахування регістру та зайвих пробілів)
+                        if (!rowGroup.toLowerCase().includes(GROUP_NAME.toLowerCase())) continue;
+                        
+                        const pair = pairIdx !== -1 ? row[pairIdx] || '' : '';
+                        const time = timeIdx !== -1 ? row[timeIdx] || '' : '';
+                        const subject = subjectIdx !== -1 ? row[subjectIdx] || '' : '';
+                        const teacher = teacherIdx !== -1 ? row[teacherIdx] || '' : '';
+                        
+                        todayReplacements.push({
+                            date: rowDate,
+                            pair: String(pair).trim(),
+                            time: String(time).trim(),
+                            subject: String(subject).trim(),
+                            teacher: String(teacher).trim()
+                        });
+                    }
+                    
+                    if (todayReplacements.length === 0) {
+                        showNoReplacements();
+                        return;
+                    }
+                    
+                    renderReplacements(todayReplacements);
+                    highlightSchedule(todayReplacements);
+                    
+                } catch (err) {
+                    console.error('Помилка завантаження замін:', err);
+                    replacementListEl.innerHTML = '<span class="no-replacements">Не вдалося завантажити дані про заміни. Перевірте з’єднання або спробуйте пізніше.</span>';
+                }
+            }
+            
+            function showNoReplacements() {
+                replacementListEl.innerHTML = '<span class="no-replacements">Поточних замін немає</span>';
+            }
+            
+            function renderReplacements(replacements) {
+                let html = '';
+                replacements.forEach(r => {
+                    html += `<div class="replacement-item">`;
+                    html += `<div class="repl-date"><i class="fas fa-calendar-day"></i> ${escapeHtml(r.date)}</div>`;
+                    if (r.pair) {
+                        html += `<div class="repl-pair">${escapeHtml(r.pair)}${r.time ? ' (' + escapeHtml(r.time) + ')' : ''} пара</div>`;
+                    } else if (r.time) {
+                        html += `<div class="repl-pair">${escapeHtml(r.time)}</div>`;
+                    }
+                    if (r.subject) {
+                        html += `<div class="repl-subject">${escapeHtml(r.subject)}</div>`;
+                    }
+                    if (r.teacher) {
+                        html += `<div class="repl-teacher"><i class="fas fa-user"></i> ${escapeHtml(r.teacher)}</div>`;
+                    }
+                    html += `</div>`;
+                });
+                replacementListEl.innerHTML = html;
+            }
+            
+            /**
+             * Підсвічує клітинки розкладу, де є заміна.
+             * Шукає за назвою предмета (частковий збіг, без урахування регістру).
+             */
+            function highlightSchedule(replacements) {
+                const scheduleCells = document.querySelectorAll('.text-schedule-table td');
+                scheduleCells.forEach(cell => {
+                    if (cell.cellIndex === 0) return; // пропускаємо колонку з номерами пар
+                    const cellText = cell.textContent.toLowerCase();
+                    for (const r of replacements) {
+                        if (!r.subject) continue;
+                        const subjectLower = r.subject.toLowerCase();
+                        // Частковий збіг: назва предмета з заміни міститься в тексті клітинки
+                        if (cellText.includes(subjectLower) || subjectLower.includes(cellText.trim())) {
+                            cell.classList.add('replacement-highlight');
+                            break;
+                        }
+                    }
+                });
+            }
+            
+            function escapeHtml(str) {
+                return String(str).replace(/[&<>"']/g, function(m) {
+                    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+                });
+            }
+            
+            // Запускаємо перевірку замін
+            loadReplacements();
         });
     </script>
 </body>
