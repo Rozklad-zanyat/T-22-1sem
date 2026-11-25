@@ -229,6 +229,41 @@
             margin-top: 4px;
         }
         
+        /* Індикатор поточного тижня під заголовком розкладу */
+        .current-week-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 14px;
+            margin: 0 0 12px 0;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-align: center;
+            background: var(--pale-green);
+            color: var(--primary-green);
+            border: 1px solid var(--light-green);
+        }
+        
+        .current-week-indicator.nad {
+            background: #f3e5f5;
+            color: #6a1b9a;
+            border-color: #ab47bc;
+        }
+        
+        .current-week-indicator.pid {
+            background: #e3f2fd;
+            color: #0d47a1;
+            border-color: #42a5f5;
+        }
+        
+        .current-week-indicator.outside {
+            background: #fff3e0;
+            color: #e65100;
+            border-color: #ffb74d;
+        }
+        
         /* Графіка освітнього процесу */
         .edu-process-grid {
             display: grid;
@@ -681,9 +716,13 @@
             <p class="subtitle">1 семестр 2026-2027</p>
         </header>
         
-        <!-- 1. Розклад занять (переміщено на початок) -->
+        <!-- 1. Розклад занять -->
         <section class="section">
             <h2 class="section-title"><i class="fas fa-table"></i> Розклад занять у 1 семестрі</h2>
+            
+            <div id="current-week-indicator" class="current-week-indicator">
+                <i class="fas fa-spinner fa-spin"></i> Визначення поточного тижня…
+            </div>
             
             <div class="text-schedule-container no-scrollbar">
                 <table class="text-schedule-table">
@@ -752,7 +791,7 @@
             </p>
         </section>
         
-        <!-- 2. Блок перевірки замін (перебудований) -->
+        <!-- 2. Блок перевірки замін -->
         <div id="replacement-section">
             <div class="note-title">
                 <i class="fas fa-exclamation-circle" style="color: #FF0000;"></i>
@@ -775,7 +814,6 @@
         <section class="section">
             <h2 class="section-title"><i class="fas fa-book"></i> Курси ClassRoom та відео зустрічі</h2>
             
-            <!-- Підказку про гортання прибрано, скрол залишено -->
             <div class="courses-container no-scrollbar">
                 <table class="courses-table">
                     <thead>
@@ -787,7 +825,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Рядок 1 -->
                         <tr class="course-row">
                             <td>1</td>
                             <td>
@@ -812,7 +849,6 @@
                             </td>
                         </tr>
                         
-                        <!-- Рядок 2 -->
                         <tr class="course-row">
                             <td>2</td>
                             <td>
@@ -835,7 +871,6 @@
                             </td>
                         </tr>
                         
-                        <!-- Рядок 3 -->
                         <tr class="course-row">
                             <td>3</td>
                             <td>
@@ -860,7 +895,6 @@
                             </td>
                         </tr>
                         
-                        <!-- Рядок 4 -->
                         <tr class="course-row">
                             <td>4</td>
                             <td>
@@ -885,7 +919,6 @@
                             </td>
                         </tr>
                         
-                        <!-- Рядок 5 -->
                         <tr class="course-row">
                             <td>5</td>
                             <td>
@@ -910,7 +943,6 @@
                             </td>
                         </tr>
                         
-                        <!-- Рядок 6 -->
                         <tr class="course-row">
                             <td>6</td>
                             <td>
@@ -935,7 +967,6 @@
                             </td>
                         </tr>
                         
-                        <!-- Рядок 7 -->
                         <tr class="course-row">
                             <td>7</td>
                             <td>
@@ -958,7 +989,6 @@
                             </td>
                         </tr>
                         
-                        <!-- Рядок 8 -->
                         <tr class="course-row">
                             <td>8</td>
                             <td>
@@ -983,7 +1013,6 @@
                             </td>
                         </tr>
                         
-                        <!-- Рядок 9 -->
                         <tr class="course-row">
                             <td>9</td>
                             <td>
@@ -1008,7 +1037,6 @@
                             </td>
                         </tr>
                         
-                        <!-- Рядок 10 -->
                         <tr class="course-row">
                             <td>10</td>
                             <td>
@@ -1033,7 +1061,6 @@
                             </td>
                         </tr>
                         
-                        <!-- Рядок 11 -->
                         <tr class="course-row">
                             <td>11</td>
                             <td>
@@ -1058,7 +1085,6 @@
                             </td>
                         </tr>
                         
-                        <!-- Рядок 12 -->
                         <tr class="course-row">
                             <td>12</td>
                             <td>
@@ -1191,9 +1217,13 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // --- Виділення поточного тижня (без змін) ---
+            // ============================================================
+            //  ВИЗНАЧЕННЯ ПОТОЧНОГО ТИЖНЯ (НАД / ПІД РИСКОЮ)
+            // ============================================================
             const today = new Date();
             const weekCells = document.querySelectorAll('.weeks-table td');
+            const indicatorEl = document.getElementById('current-week-indicator');
+            let currentWeekType = null;
             
             weekCells.forEach(cell => {
                 const cellText = cell.textContent.trim();
@@ -1216,11 +1246,32 @@
                         label.textContent = 'Поточний тиждень';
                         label.style.cssText = 'font-size:0.75rem;color:#DC143C;font-weight:bold;margin-top:4px;';
                         cell.appendChild(label);
+                        
+                        if (cell.classList.contains('week-nad')) {
+                            currentWeekType = 'nad';
+                        } else if (cell.classList.contains('week-pid')) {
+                            currentWeekType = 'pid';
+                        }
                     }
                 }
             });
             
-            // --- Плавна прокрутка до секцій (без змін) ---
+            if (indicatorEl) {
+                if (currentWeekType === 'nad') {
+                    indicatorEl.className = 'current-week-indicator nad';
+                    indicatorEl.innerHTML = '<i class="fas fa-arrow-up"></i> Поточний тиждень: <strong>НАД РИСКОЮ</strong>';
+                } else if (currentWeekType === 'pid') {
+                    indicatorEl.className = 'current-week-indicator pid';
+                    indicatorEl.innerHTML = '<i class="fas fa-arrow-down"></i> Поточний тиждень: <strong>ПІД РИСКОЮ</strong>';
+                } else {
+                    indicatorEl.className = 'current-week-indicator outside';
+                    indicatorEl.innerHTML = '<i class="fas fa-info-circle"></i> Поточна дата поза навчальним розкладом';
+                }
+            }
+            
+            // ============================================================
+            //  ПЛАВНА ПРОКРУТКА ДО СЕКЦІЙ
+            // ============================================================
             const sectionTitles = document.querySelectorAll('.section-title');
             sectionTitles.forEach(title => {
                 title.style.cursor = 'pointer';
@@ -1233,25 +1284,15 @@
             // ============================================================
             //  ПЕРЕВІРКА ЗАМІН З GOOGLE-ТАБЛИЦІ
             // ============================================================
-            
-// ID вашої Google-таблиці (взятий з посилання між /d/ та /edit)
-const SHEET_ID = '1QIn-Hnj49b32rjwrMaay_TRu-UQjA6YTb9Um2lzmUOk';
-
-// gid=0 — це перший аркуш таблиці. Якщо заміни на іншому аркуші — змініть 0 на потрібний gid
-const SHEET_JSON_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=0`;
-
-const GROUP_NAME = "Т-22";
+            const SHEET_ID = '1QIn-Hnj49b32rjwrMaay_TRu-UQjA6YTb9Um2lzmUOk';
+            const SHEET_JSON_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=0`;
+            const GROUP_NAME = 'Т-22';
             
             const replacementListEl = document.getElementById('replacement-list');
             
-            /**
-             * Нормалізує дату до формату dd.mm.yyyy.
-             * Підтримує dd.mm.yyyy, dd.mm.yy, dd/mm/yyyy, dd-mm-yyyy.
-             */
             function normalizeDate(str) {
                 if (!str) return '';
                 str = String(str).trim();
-                // Витягуємо числа
                 const parts = str.match(/(\d{1,4})[./-](\d{1,2})[./-](\d{1,4})/);
                 if (!parts) return str;
                 let day = parseInt(parts[1], 10);
@@ -1266,32 +1307,32 @@ const GROUP_NAME = "Т-22";
                 return `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}.${d.getFullYear()}`;
             }
             
-            /**
- * Парсить відповідь Google Visualization API (gviz).
- * Відповідь приходить у вигляді: google.visualization.Query.setResponse({...});
- */
-function parseFeed(jsonText) {
-    const start = jsonText.indexOf('{');
-    const end = jsonText.lastIndexOf('}');
-    if (start === -1 || end === -1) return [];
-    const data = JSON.parse(jsonText.substring(start, end + 1));
-    if (!data.table) return [];
-    const headers = data.table.cols.map(c => (c && c.label) ? c.label : '');
-    const rows = data.table.rows.map(r =>
-        (r.c || []).map(cell => {
-            if (!cell) return '';
-            // f — відформатоване значення (напр., дата як "25.11.2026"), v — сире
-            if (cell.f != null) return cell.f;
-            if (cell.v != null) return cell.v;
-            return '';
-        })
-    );
-    return [headers, ...rows];
-}
+            function parseFeed(jsonText) {
+                const start = jsonText.indexOf('{');
+                const end = jsonText.lastIndexOf('}');
+                if (start === -1 || end === -1) return [];
+                const data = JSON.parse(jsonText.substring(start, end + 1));
+                if (!data.table) return [];
+                
+                let headers = data.table.cols.map(c => (c && c.label) ? String(c.label) : '');
+                const labelsEmpty = headers.every(h => !h.trim());
+                
+                const rows = (data.table.rows || []).map(r =>
+                    (r.c || []).map(cell => {
+                        if (!cell) return '';
+                        if (cell.f != null) return String(cell.f);
+                        if (cell.v != null) return String(cell.v);
+                        return '';
+                    })
+                );
+                
+                if (labelsEmpty && rows.length > 0) {
+                    headers = rows[0];
+                    return [headers, ...rows.slice(1)];
+                }
+                return [headers, ...rows];
+            }
             
-            /**
-             * Знаходить індекс колонки за ключовими словами.
-             */
             function findColumnIndex(headers, keywords) {
                 for (let i = 0; i < headers.length; i++) {
                     const h = String(headers[i] || '').toLowerCase();
@@ -1300,13 +1341,10 @@ function parseFeed(jsonText) {
                 return -1;
             }
             
-            /**
-             * Завантажує та обробляє заміни.
-             */
             async function loadReplacements() {
                 try {
                     const response = await fetch(SHEET_JSON_URL);
-                    if (!response.ok) throw new Error('Network response was not ok');
+                    if (!response.ok) throw new Error('HTTP ' + response.status);
                     const jsonText = await response.text();
                     const data = parseFeed(jsonText);
                     
@@ -1315,30 +1353,50 @@ function parseFeed(jsonText) {
                         return;
                     }
                     
-                    const headers = data[0].map(h => String(h || '').trim());
-                    const dateIdx = findColumnIndex(headers, ['дата']);
-                    const groupIdx = findColumnIndex(headers, ['група', 'group']);
-                    const pairIdx = findColumnIndex(headers, ['пара', '№ пари', 'номер пари']);
-                    const timeIdx = findColumnIndex(headers, ['час', 'time']);
-                    const subjectIdx = findColumnIndex(headers, ['предмет', 'дисципліна', 'освітній компонент']);
-                    const teacherIdx = findColumnIndex(headers, ['викладач', 'teacher', 'піб']);
+                    // Шукаємо рядок-заголовок у перших 5 рядках
+                    let headerRow = -1;
+                    let dateIdx = -1, groupIdx = -1, pairIdx = -1, timeIdx = -1, subjectIdx = -1, teacherIdx = -1;
                     
-                    if (dateIdx === -1 || groupIdx === -1) {
-                        // Якщо не вдалося визначити колонки — показуємо повідомлення
-                        replacementListEl.innerHTML = '<span class="no-replacements">Не вдалося розпізнати структуру таблиці замін.</span>';
+                    for (let h = 0; h < Math.min(5, data.length); h++) {
+                        const headers = data[h].map(x => String(x || '').toLowerCase().trim());
+                        const d = findColumnIndex(headers, ['дата', 'date', 'число']);
+                        const g = findColumnIndex(headers, ['група', 'group', 'гр.']);
+                        if (d !== -1 && g !== -1) {
+                            headerRow = h;
+                            dateIdx = d;
+                            groupIdx = g;
+                            pairIdx    = findColumnIndex(headers, ['пара', '№ пари', 'номер пари', 'п.№']);
+                            timeIdx    = findColumnIndex(headers, ['час', 'time', 'година']);
+                            subjectIdx = findColumnIndex(headers, ['предмет', 'дисципліна', 'освітній компонент', 'назва']);
+                            teacherIdx = findColumnIndex(headers, ['викладач', 'teacher', 'піб', 'викл']);
+                            break;
+                        }
+                    }
+                    
+                    if (headerRow === -1) {
+                        let debug = 'Не вдалося розпізнати структуру таблиці замін.<br>' +
+                                    '<small style="color:#757575;">Ось що реально є в таблиці (перші 3 рядки):<br>';
+                        for (let i = 0; i < Math.min(3, data.length); i++) {
+                            debug += 'Рядок ' + (i + 1) + ': ' +
+                                     data[i].slice(0, 10).map(x => '[' + escapeHtml(String(x)) + ']').join(' ') +
+                                     '<br>';
+                        }
+                        debug += '</small>';
+                        replacementListEl.innerHTML = '<span class="no-replacements">' + debug + '</span>';
                         return;
                     }
                     
                     const todayStr = todayString();
                     const todayReplacements = [];
                     
-                    for (let r = 1; r < data.length; r++) {
+                    for (let r = headerRow + 1; r < data.length; r++) {
                         const row = data[r];
+                        if (!row || row.length === 0) continue;
+                        
                         const rowDate = normalizeDate(row[dateIdx] || '');
                         const rowGroup = String(row[groupIdx] || '').trim();
                         
                         if (rowDate !== todayStr) continue;
-                        // Перевірка групи (без урахування регістру та зайвих пробілів)
                         if (!rowGroup.toLowerCase().includes(GROUP_NAME.toLowerCase())) continue;
                         
                         const pair = pairIdx !== -1 ? row[pairIdx] || '' : '';
@@ -1365,7 +1423,7 @@ function parseFeed(jsonText) {
                     
                 } catch (err) {
                     console.error('Помилка завантаження замін:', err);
-                    replacementListEl.innerHTML = '<span class="no-replacements">Не вдалося завантажити дані про заміни. Перевірте з’єднання або спробуйте пізніше.</span>';
+                    replacementListEl.innerHTML = '<span class="no-replacements">Не вдалося завантажити дані про заміни: ' + escapeHtml(err.message) + '</span>';
                 }
             }
             
@@ -1378,10 +1436,8 @@ function parseFeed(jsonText) {
                 replacements.forEach(r => {
                     html += `<div class="replacement-item">`;
                     html += `<div class="repl-date"><i class="fas fa-calendar-day"></i> ${escapeHtml(r.date)}</div>`;
-                    if (r.pair) {
-                        html += `<div class="repl-pair">${escapeHtml(r.pair)}${r.time ? ' (' + escapeHtml(r.time) + ')' : ''} пара</div>`;
-                    } else if (r.time) {
-                        html += `<div class="repl-pair">${escapeHtml(r.time)}</div>`;
+                    if (r.pair || r.time) {
+                        html += `<div class="repl-pair">${escapeHtml(r.pair)}${r.time ? ' (' + escapeHtml(r.time) + ')' : ''}</div>`;
                     }
                     if (r.subject) {
                         html += `<div class="repl-subject">${escapeHtml(r.subject)}</div>`;
@@ -1394,20 +1450,18 @@ function parseFeed(jsonText) {
                 replacementListEl.innerHTML = html;
             }
             
-            /**
-             * Підсвічує клітинки розкладу, де є заміна.
-             * Шукає за назвою предмета (частковий збіг, без урахування регістру).
-             */
             function highlightSchedule(replacements) {
                 const scheduleCells = document.querySelectorAll('.text-schedule-table td');
                 scheduleCells.forEach(cell => {
-                    if (cell.cellIndex === 0) return; // пропускаємо колонку з номерами пар
-                    const cellText = cell.textContent.toLowerCase();
+                    if (cell.cellIndex === 0) return;
+                    const cellText = cell.textContent.toLowerCase().replace(/\s+/g, ' ').trim();
+                    if (!cellText || cellText.includes('- - -')) return;
+                    
                     for (const r of replacements) {
                         if (!r.subject) continue;
-                        const subjectLower = r.subject.toLowerCase();
-                        // Частковий збіг: назва предмета з заміни міститься в тексті клітинки
-                        if (cellText.includes(subjectLower) || subjectLower.includes(cellText.trim())) {
+                        const subjectLower = r.subject.toLowerCase().replace(/\s+/g, ' ').trim();
+                        if (!subjectLower) continue;
+                        if (cellText.includes(subjectLower) || subjectLower.includes(cellText)) {
                             cell.classList.add('replacement-highlight');
                             break;
                         }
@@ -1421,7 +1475,6 @@ function parseFeed(jsonText) {
                 });
             }
             
-            // Запускаємо перевірку замін
             loadReplacements();
         });
     </script>
